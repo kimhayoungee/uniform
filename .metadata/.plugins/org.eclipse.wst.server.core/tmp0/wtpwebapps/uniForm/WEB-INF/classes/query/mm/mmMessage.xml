@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uniform.mm.message.dao.MmMessageDao">
+
+	<select id="messageList" parameterType="mmmessage" resultType="mmmessage">
+	
+		SELECT 
+		      MM.MM_NO MM_NO
+		     ,MM.I_NO  I_NO
+		     ,MM.I_NAMEKR I_NAMEKR
+		     ,MM.MM_MESSAGE    MM_MESSAGE
+		     ,MM.MM_INSERTDATE MM_INSERTDATE
+		FROM(SELECT
+		          ROWNUM  RR
+		         ,M.MM_NO MM_NO
+		         ,M.I_NO  I_NO
+		         ,(SELECT I.I_NAMEKR 
+		           FROM UNIFORM_INFO I
+		           WHERE I.I_NO = M.I_NO)                    I_NAMEKR
+		         ,M.MM_MESSAGE                               MM_MESSAGE
+		         ,TO_CHAR(M.MM_INSERTDATE,'YYYY-MM-DD')      MM_INSERTDATE
+		     FROM  UNIFORM_MESSAGE M
+		     WHERE M.MM_RECIPIENT = #{i_no}
+		     AND   M.MM_DELETEYN  = 'Y'
+		     ORDER BY M.MM_NO DESC) MM
+		WHERE MM.RR BETWEEN #{start} AND #{end}
+	
+	</select>
+	
+	<select id="messageChaebun" resultType="mmmessage">
+	
+		SELECT
+		      NVL(MAX(SUBSTR(M.MM_NO,-4)),0)+1 as MM_NO
+		FROM UNIFORM_MESSAGE M
+	
+	</select>
+	
+	<insert id="insertMessage" parameterType="mmmessage">
+	
+		INSERT INTO UNIFORM_MESSAGE(MM_NO
+								   ,I_NO
+								   ,MM_RECIPIENT
+								   ,MM_MESSAGE
+								   ,MM_INSERTDATE
+								   ,MM_UPDATEDATE
+								   ,MM_DELETEYN)
+								  
+		VALUES( #{mm_no}
+			   ,#{i_no}
+			   ,#{mm_recipient}
+			   ,#{mm_message}
+			   ,SYSDATE
+			   ,SYSDATE
+			   ,'Y')						   
+	
+	</insert>
+	
+	<select id="detailMessage" parameterType="mmmessage" resultType="mmmessage">
+	
+		SELECT
+		      M.MM_NO MM_NO
+		     ,M.I_NO  I_NO
+		     ,(SELECT I.I_NAMEKR FROM UNIFORM_INFO I
+		       WHERE I.I_NO = M.I_NO) I_NAMEKR
+		     ,M.MM_MESSAGE    MM_MESSAGE
+		     ,M.MM_INSERTDATE MM_INSERTDATE
+		FROM  UNIFORM_MESSAGE M
+		WHERE M.MM_NO = #{mm_no}
+		AND   M.MM_DELETEYN  = 'Y'
+	
+	</select>
+	
+	<update id="deleteMessage" parameterType="mmmessage">
+	
+		UPDATE UNIFORM_MESSAGE M
+		SET M.MM_DELETEYN = 'N'
+		   ,M.MM_UPDATEDATE = SYSDATE
+		WHERE M.MM_NO = #{mm_no}
+		AND   M.MM_DELETEYN = 'Y'  
+	
+	</update>
+	
+	<select id="countList" parameterType="mmmessage" resultType="int">
+	
+		SELECT COUNT(1)
+		FROM UNIFORM_MESSAGE
+		WHERE MM_DELETEYN = 'Y'
+		AND   MM_RECIPIENT = #{i_no}
+	
+	</select>
+	
+	<select id="question" parameterType="mmmessage" resultType="mmmessage">
+	
+		SELECT S.MM_MESSAGE
+		FROM UNIFORM_SETTING S
+		WHERE S.I_NO = #{mm_recipient}
+		
+	</select>
+
+</mapper>

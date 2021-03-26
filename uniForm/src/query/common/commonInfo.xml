@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.common.info.dao.CommonInfoDao">
+	
+	<select id="miniInfo" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT 
+			  L.I_NO I_NO
+			 ,L.I_NAMEKR I_NAMEKR
+		FROM (SELECT 
+                    I.I_NO       I_NO
+                   ,I.I_NAMEKR   I_NAMEKR
+                   ,E.EM_PW      EM_PW
+              FROM UNIFORM_EMP E, UNIFORM_INFO I
+			  WHERE E.I_NO = I.I_NO
+			  AND   I.I_DELETEYN = 'Y') L
+		WHERE L.I_NO = #{i_no}	
+	
+	</select>
+	
+	<select id="mainInfo" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT 
+			  L.I_NO 	 I_NO
+			 ,L.I_NAMEKR I_NAMEKR
+			 ,L.EM_IMG	 EM_IMG
+			 ,L.EM_POSITION EM_POSITION
+			 ,L.EM_DEPT	 EM_DEPT
+			 ,L.EM_TEAM	 EM_TEAM
+		FROM (SELECT 
+                    I.I_NO       I_NO
+                   ,I.I_NAMEKR   I_NAMEKR
+                   ,E.EM_PW      EM_PW
+                   ,E.EM_IMG	 EM_IMG
+                   ,(SELECT C.CODE_DETAIL 
+                     FROM   UNIFORM_CODE C, UNIFORM_EMP M
+                     WHERE  C.CODE = M.EM_POSITION
+                     AND    M.I_NO = #{i_no}) EM_POSITION
+                   ,(SELECT CC.CODE_DETAIL 
+                     FROM   UNIFORM_CODE CC, UNIFORM_EMP MM
+                     WHERE  CC.CODE = MM.EM_DEPT
+                     AND    MM.I_NO = #{i_no}) EM_DEPT
+                   ,(SELECT CCC.CODE_DETAIL 
+                     FROM   UNIFORM_CODE CCC, UNIFORM_EMP MMM
+                     WHERE  CCC.CODE = MMM.EM_TEAM
+                     AND    MMM.I_NO = #{i_no}) EM_TEAM
+              FROM  UNIFORM_EMP E, UNIFORM_INFO I
+			  WHERE E.I_NO = I.I_NO
+			  AND   I.I_DELETEYN = 'Y') L
+		WHERE L.I_NO = #{i_no}
+	
+	</select>
+	
+	<select id="myInfo" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT
+		        I.I_NO        I_NO        
+		       ,I.I_NAMEKR    I_NAMEKR     
+		       ,I.I_FIRSTNAME I_FIRSTNAME  
+		       ,I.I_LASTNAME  I_LASTNAME     
+		       ,I.I_BIRTH     I_BIRTH     
+		       ,I.I_RRN       I_RRN      
+		       ,I.I_GENDER    I_GENDER   
+		       ,I.I_HP        I_HP       
+		       ,I.I_TEL       I_TEL     
+		       ,I.I_MAIL      I_MAIL     
+		       ,I.I_POSTNO    I_POSTNO     
+		       ,I.I_DORO      I_DORO       
+		       ,I.I_DETAIL    I_DETAIL     
+		       ,I.I_JIBUN     I_JIBUN      
+		       ,TO_CHAR(TO_DATE(I.I_INSERTDATE),'YYYY-MM-DD') I_INSERTDATE  
+		       ,TO_CHAR(TO_DATE(I.I_UPDATEDATE),'YYYY-MM-DD') I_UPDATEDATE  
+		       ,TO_CHAR(TO_DATE(E.EM_HIREDATE) ,'YYYY-MM-DD') EM_HIREDATE  
+		       ,E.EM_IMG      EM_IMG        -- 교직원 사진
+		       ,(SELECT C.CODE_DETAIL  FROM UNIFORM_CODE C  WHERE C.CODE = E.EM_DEPT)     EM_DEPT
+		       ,(SELECT C.CODE_DETAIL  FROM UNIFORM_CODE C  WHERE C.CODE = E.EM_TEAM)     EM_TEAM
+		       ,(SELECT C.CODE_DETAIL  FROM UNIFORM_CODE C  WHERE C.CODE = E.EM_POSITION) EM_POSITION
+		       ,E.EM_MILITARY     EM_MILITARY                           
+		       ,E.EM_MNO          EM_MNO                                
+		       ,TO_CHAR(TO_DATE(E.EM_MSTART),'YYYY-MM-DD')   EM_MSTART    
+		       ,TO_CHAR(TO_DATE(E.EM_MEND),  'YYYY-MM-DD')   EM_MEND    
+		       ,E.EM_EXEMP    EM_EXEMP                                  
+		       ,E.EM_ACADEMIC EM_ACADEMIC                               
+		       ,E.EM_SIGN     EM_SIGN                                   
+		FROM    UNIFORM_EMP         E   
+		       ,UNIFORM_INFO        I   
+		WHERE   I.I_NO        = E.I_NO
+		AND     I.I_DELETEYN  = 'Y'
+		AND     I.I_NO        = #{i_no}
+		
+	</select>
+	
+	<select id="mmSetting" parameterType="mmsetting" resultType="mmsetting">
+	
+		SELECT 
+			  S.MM_MESSAGE MM_MESSAGE
+			 ,S.MM_ALARM   MM_ALARM
+		FROM UNIFORM_SETTING S
+		WHERE S.I_NO = #{i_no}
+	
+	</select>
+	
+	<select id="infoCard" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT
+				I.I_NO        I_NO        
+		       ,I.I_NAMEKR    I_NAMEKR
+		       ,(SELECT C.CODE_DETAIL  FROM UNIFORM_CODE C  WHERE C.CODE = E.EM_DEPT)  EM_DEPT
+		       ,TO_CHAR(TO_DATE(E.EM_HIREDATE) ,'YYYY-MM-DD')                          EM_HIREDATE
+		FROM    UNIFORM_EMP  E
+		       ,UNIFORM_INFO I
+		WHERE   I.I_NO        = E.I_NO
+		AND     I.I_DELETEYN  = 'Y'
+		AND     SUBSTR(I.I_NO,1,1) != 'M'
+		<if test="keyword!='' and keyword!=null">
+			AND E.EM_DEPT = #{keyword}
+		</if>
+		
+		<if test="search!='' and search!=null">
+			AND I.I_NAMEKR LIKE '%' || #{search} || '%'
+		</if>
+		ORDER BY I.I_NO DESC 
+	
+	</select>
+	
+	<select id="detailInfo" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT
+		        I.I_NO        I_NO        
+		       ,I.I_NAMEKR    I_NAMEKR     
+		       ,I.I_FIRSTNAME I_FIRSTNAME  
+		       ,I.I_LASTNAME  I_LASTNAME     
+		       ,I.I_BIRTH     I_BIRTH     
+		       ,I.I_RRN       I_RRN      
+		       ,I.I_GENDER    I_GENDER   
+		       ,I.I_HP        I_HP       
+		       ,I.I_TEL       I_TEL     
+		       ,I.I_MAIL      I_MAIL     
+		       ,I.I_POSTNO    I_POSTNO     
+		       ,I.I_DORO      I_DORO       
+		       ,I.I_DETAIL    I_DETAIL     
+		       ,I.I_JIBUN     I_JIBUN      
+		       ,TO_CHAR(TO_DATE(I.I_INSERTDATE),'YYYY-MM-DD') I_INSERTDATE  
+		       ,TO_CHAR(TO_DATE(I.I_UPDATEDATE),'YYYY-MM-DD') I_UPDATEDATE  
+		       ,E.EM_HIREDATE     EM_HIREDATE  
+		       ,E.EM_IMG          EM_IMG
+		       ,E.EM_DEPT         EM_DEPT
+		       ,E.EM_TEAM         EM_TEAM
+		       ,E.EM_POSITION     EM_POSITION
+		       ,E.EM_MILITARY     EM_MILITARY                           
+		       ,E.EM_MNO          EM_MNO                                
+		       ,E.EM_MSTART       EM_MSTART    
+		       ,E.EM_MEND         EM_MEND    
+		       ,E.EM_EXEMP        EM_EXEMP                                  
+		       ,E.EM_ACADEMIC     EM_ACADEMIC                               
+		       ,E.EM_SIGN         EM_SIGN                                   
+		FROM    UNIFORM_EMP         E   
+		       ,UNIFORM_INFO        I   
+		WHERE   I.I_NO        = E.I_NO
+		AND     I.I_DELETEYN  = 'Y'
+		AND     I.I_NO        = #{i_no}
+		
+	</select>
+	
+</mapper>

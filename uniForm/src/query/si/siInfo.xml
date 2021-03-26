@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.si.info.dao.SiInfoDao">
+
+	<select id="studentList" parameterType="siinfo" resultType="siinfo">
+	
+		SELECT
+			   S.I_NO        I_NO
+			  ,I.I_NAMEKR    I_NAMEKR
+			  ,(SELECT C.CODE_DETAIL 
+			  	FROM   UNIFORM_CODE C
+			  	WHERE  C.CODE = S.SI_MAJOR) SI_MAJOR
+			  ,S.SI_GRADE    SI_GRADE
+			  ,S.SI_REGISTER SI_REGISTER
+		FROM   UNIFORM_STUDENT S,UNIFORM_INFO I
+		WHERE  S.I_NO = I.I_NO
+		AND    I.I_DELETEYN = 'Y'
+		ORDER BY S.I_NO DESC
+	
+	</select>
+	
+	<select id="siChaebun" resultType="siinfo">
+	
+		SELECT
+			 NVL(MAX(SUBSTR(S.I_NO,-4)),0)+1 I_NO
+		FROM UNIFORM_STUDENT S
+	
+	</select>
+	
+	<insert id="insertInfo" parameterType="siinfo">
+	
+		INSERT INTO UNIFORM_INFO( I_NO,
+		                          I_NAMEKR,
+		                          I_FIRSTNAME,
+		                          I_LASTNAME,
+		                          I_BIRTH,
+		                          I_RRN,
+		                          I_GENDER,
+		                          I_HP,
+		                          I_TEL,
+		                          I_MAIL,
+		                          I_POSTNO,
+		                          I_DORO,
+		                          I_DETAIL,
+		                          I_JIBUN,
+		                          I_INSERTDATE,
+		                          I_UPDATEDATE,
+		                          I_DELETEYN)
+                          
+		VALUES( #{i_no},
+		        #{i_nameKr},
+		        #{i_firstName},
+		        #{i_lastName},
+		        #{i_birth},
+		        #{i_rrn},
+		        #{i_gender},
+		        #{i_hp},
+		        #{i_tel},
+		        #{i_mail},
+		        #{i_postNo},
+		        #{i_doro},
+		        #{i_detail},
+		        #{i_jibun},
+		        TO_CHAR(SYSDATE,'YYYY-MM-DD'),
+		        TO_CHAR(SYSDATE,'YYYY-MM-DD'),
+		        'Y')
+	
+	</insert>
+	
+	<insert id="insertSi" parameterType="siinfo">
+	
+		INSERT INTO UNIFORM_STUDENT(I_NO,
+									SI_MAJOR,
+									SI_GRADE,
+									SI_SEMESTER,
+									SI_REGISTER,
+									SI_HIGHSCHOOL,
+									SI_ADMISSIONINFO,
+									SI_ADMISSIONDATE,
+									SI_IMG)
+		VALUES(#{i_no},
+			   #{si_major},
+			   #{si_grade},
+			   #{si_semester},
+			   CONCAT(#{si_register},TO_CHAR(SYSDATE,'YYYY-MM-DD')),
+			   #{si_highschool},
+			   #{si_admissionInfo},
+			   #{si_admissionDate},
+			   #{si_img})							
+	
+	</insert>
+	
+	<select id="detailSi" parameterType="siinfo" resultType="siinfo">
+	
+		SELECT
+		      S.I_NO        I_NO,
+		      I.I_NAMEKR    I_NAMEKR,
+		      I.I_FIRSTNAME I_FIRSTNAME,
+		      I.I_LASTNAME  I_LASTNAME,
+		      I.I_BIRTH     I_BIRTH,
+		      I.I_RRN       I_RRN,
+		      I.I_GENDER    I_GENDER,     
+		      I.I_HP        I_HP,          
+		      I.I_TEL       I_TEL,        
+		      I.I_MAIL      I_MAIL,        
+		      I.I_POSTNO    I_POSTNO,      
+		      I.I_DORO      I_DORO,      
+		      I.I_DETAIL    I_DETAIL,    
+		      I.I_JIBUN     I_JIBUN,      
+		      TO_CHAR(TO_DATE(I.I_INSERTDATE),'YYYY-MM-DD') I_INSERTDATE, 
+		      TO_CHAR(TO_DATE(I.I_UPDATEDATE),'YYYY-MM-DD') I_UPDATEDATE,
+		      (SELECT C.CODE_DETAIL FROM UNIFORM_CODE C WHERE C.CODE = S.SI_MAJOR) SI_MAJOR,
+		      S.SI_AVG             SI_AVG,
+		      S.SI_CREDITS         SI_CREDITS,
+		      S.SI_GRADE           SI_GRADE,
+		      S.SI_SEMESTER        SI_SEMESTER,
+		      S.SI_REGISTER        SI_REGISTER,
+		      S.SI_HIGHSCHOOL      SI_HIGHSCHOOL,
+		      S.SI_ADMISSIONINFO   SI_ADMISSIONINFO,
+		      TO_CHAR(TO_DATE(S.SI_ADMISSIONDATE) ,'YYYY-MM-DD')   SI_ADMISSIONDATE,
+		      TO_CHAR(TO_DATE(S.SI_GRADUATIONDATE),'YYYY-MM-DD')   SI_GRADUATIONDATE,
+		      S.SI_IMG             SI_IMG
+		FROM UNIFORM_INFO I, UNIFORM_STUDENT S
+		WHERE I.I_NO = S.I_NO
+		AND   I.I_DELETEYN = 'Y'
+		AND   S.I_NO = #{i_no}
+	
+	</select>
+	
+	<select id="cDetailSi" parameterType="siinfo" resultType="siinfo">
+	
+		SELECT
+		      S.I_NO        I_NO,
+		      I.I_NAMEKR    I_NAMEKR,
+		      I.I_FIRSTNAME I_FIRSTNAME,
+		      I.I_LASTNAME  I_LASTNAME,
+		      I.I_BIRTH     I_BIRTH,
+		      I.I_RRN       I_RRN,
+		      I.I_GENDER    I_GENDER,     
+		      I.I_HP        I_HP,          
+		      I.I_TEL       I_TEL,        
+		      I.I_MAIL      I_MAIL,        
+		      I.I_POSTNO    I_POSTNO,      
+		      I.I_DORO      I_DORO,      
+		      I.I_DETAIL    I_DETAIL,    
+		      I.I_JIBUN     I_JIBUN,      
+		      TO_CHAR(TO_DATE(I.I_INSERTDATE),'YYYY-MM-DD') I_INSERTDATE, 
+		      TO_CHAR(TO_DATE(I.I_UPDATEDATE),'YYYY-MM-DD') I_UPDATEDATE,
+		      S.SI_MAJOR           SI_MAJOR,
+		      S.SI_AVG             SI_AVG,
+		      S.SI_CREDITS         SI_CREDITS,
+		      S.SI_GRADE           SI_GRADE,
+		      S.SI_SEMESTER        SI_SEMESTER,
+		      S.SI_REGISTER        SI_REGISTER,
+		      S.SI_HIGHSCHOOL      SI_HIGHSCHOOL,
+		      S.SI_ADMISSIONINFO   SI_ADMISSIONINFO,
+		      S.SI_ADMISSIONDATE   SI_ADMISSIONDATE,
+		      S.SI_GRADUATIONDATE  SI_GRADUATIONDATE,
+		      S.SI_IMG             SI_IMG
+		FROM UNIFORM_INFO I, UNIFORM_STUDENT S
+		WHERE I.I_NO = S.I_NO
+		AND   I.I_DELETEYN = 'Y'
+		AND   S.I_NO = #{i_no}
+	
+	</select>
+	
+	<update id="updateInfo" parameterType="siinfo">
+	
+		UPDATE UNIFORM_INFO I
+		SET  I.I_NAMEKR     = #{i_nameKr}
+			,I.I_FIRSTNAME  = #{i_firstName}
+			,I.I_LASTNAME   = #{i_lastName}
+			,I.I_BIRTH      = #{i_birth}
+			,I.I_RRN        = #{i_rrn}
+			,I.I_HP         = #{i_hp}
+			,I.I_TEL        = #{i_tel}
+			,I.I_MAIL       = #{i_mail}
+			,I.I_POSTNO     = #{i_postNo}
+			,I.I_DORO       = #{i_doro}
+			,I.I_JIBUN      = #{i_jibun}
+			,I.I_DETAIL     = #{i_detail}
+			,I.I_UPDATEDATE = SYSDATE
+		WHERE I.I_NO        = #{i_no}
+	
+	</update>
+	
+	<update id="updateStudent" parameterType="siinfo">
+	
+		UPDATE UNIFORM_STUDENT S
+		SET S.SI_MAJOR          = #{si_major},
+			S.SI_AVG            = #{si_avg},
+			S.SI_CREDITS        = #{si_credits},
+			S.SI_GRADE          = #{si_grade},
+			S.SI_SEMESTER       = #{si_semester},
+		<if test="si_register!=null and si_register!=''">
+			S.SI_REGISTER = CONCAT(#{si_register},TO_CHAR(SYSDATE,'YYYY-MM-DD')),
+		</if>
+			S.SI_HIGHSCHOOL     = #{si_highschool},
+			S.SI_ADMISSIONINFO  = #{si_admissionInfo},
+			S.SI_ADMISSIONDATE  = #{si_admissionDate},
+			S.SI_GRADUATIONDATE = #{si_graduationDate},
+			S.SI_IMG            = #{si_img}
+		WHERE  S.I_NO = #{i_no}
+	
+	</update>
+	
+	<update id="deleteSi">
+	
+		UPDATE UNIFORM_INFO I
+		SET I.I_DELETEYN = 'N'
+		   ,I.I_UPDATEDATE = SYSDATE
+		WHERE I.I_NO       = #{i_no}
+		AND   I.I_DELETEYN = 'Y'
+		
+	</update>
+
+</mapper>

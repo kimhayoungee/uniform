@@ -1,0 +1,463 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.bm.board.dao.BmBoardDao">
+
+	<!-- ======== 글목록(selectAll) 구현 ================== -->
+	<select id="boardList"
+			parameterType="bmboard"
+			resultType="bmboard">
+			SELECT *
+			FROM (  SELECT
+			                 ROWNUM             BM_ROWNUM
+			                ,B.BM_NO            BM_NO
+			                ,B.I_NO             I_NO
+			                ,(SELECT I.I_NAMEKR I_NAMEKR FROM UNIFORM_INFO I WHERE I.I_NO = B.I_NO)         I_NAMEKR
+			                ,B.BM_CATEGORY      BM_CATEGORY
+			                ,B.BM_SUBJECT       BM_SUBJECT	
+			                ,B.BM_CONTEXT       BM_CONTEXT	
+			                ,B.BM_IMAGE         BM_IMAGE
+			                ,B.BM_FILE          BM_FILE	
+			                ,B.BM_VIEW          BM_VIEW
+			                ,B.BM_LIKEY         BM_LIKEY
+			                ,B.BM_SCRAP         BM_SCRAP
+			                ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+			                ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+			                ,B.BM_DELETEYN     BM_DELETEYN
+			        FROM     UNIFORM_BOARD B
+			        WHERE    B.BM_DELETEYN = 'Y'
+		        <if test="bm_category!=null and bm_category!='' and bm_category!='null' and bm_category!='전체'">
+					AND		B.BM_CATEGORY = #{bm_category,jdbcType=VARCHAR}
+				</if>
+				<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+					<![CDATA[AND B.BM_INSERTDATE >= #{startDate,jdbcType=VARCHAR}]]>
+					<![CDATA[AND B.BM_INSERTDATE <= #{endDate,jdbcType=VARCHAR}]]>
+				</if>
+				<if test="searchFilter=='작성자'">
+					<![CDATA[AND I.I_NAMEKR LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+				</if>
+				<if test="searchFilter=='제목'">
+					<![CDATA[AND B.BM_SUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+				</if>
+				<if test="searchFilter=='내용'">
+					<![CDATA[AND B.BM_CONTEXT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+				</if>
+				<if test="searchFilter=='제목+내용'">
+					<![CDATA[AND B.BM_SUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+					<![CDATA[OR B.BM_CONTEXT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+				</if>
+			        ORDER BY B.BM_NO DESC )  L
+			WHERE 	L.BM_ROWNUM BETWEEN #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR}
+		
+	</select>
+	
+	<!-- ======== 게시판 채번 ============================== -->
+	<select id="boardNum"
+			resultType="bmboard">	
+		SELECT 
+			NVL(MAX(SUBSTR(B.BM_NO, -4)), 0) + 1   BM_NO
+		FROM UNIFORM_BOARD B
+	</select>
+	
+	<!-- ======== 글상세보기(detail) 구현 ================== -->
+	<select id="boardDetail" 
+			parameterType="bmboard" 
+			resultType="bmboard">
+		SELECT
+		         B.BM_NO            BM_NO
+		        ,B.I_NO             I_NO
+		        ,I.I_NAMEKR         I_NAMEKR
+		        ,B.BM_CATEGORY      BM_CATEGORY
+		        ,B.BM_SUBJECT       BM_SUBJECT	
+		        ,B.BM_CONTEXT       BM_CONTEXT	
+		        ,B.BM_IMAGE         BM_IMAGE
+		        ,B.BM_FILE          BM_FILE	
+		        ,B.BM_VIEW          BM_VIEW
+		        ,B.BM_LIKEY         BM_LIKEY
+		        ,(  SELECT 
+		                  	LK.BM_LIKEYYN   BM_LIKEYYN
+		            FROM  	UNIFORM_LIKEY   LK
+		            WHERE 	LK.I_NO = #{i_no,jdbcType=VARCHAR}
+		            AND	  	LK.BM_NO = #{bm_no,jdbcType=VARCHAR})   BM_LIKEYYN
+		        ,B.BM_SCRAP         BM_SCRAP
+		        ,(  SELECT 
+		                    SC.BM_SCRAPYN   BM_SCRAPYN
+		            FROM    UNIFORM_SCRAP   SC
+		            WHERE   SC.I_NO = #{i_no,jdbcType=VARCHAR}
+		            AND     SC.BM_NO = #{bm_no,jdbcType=VARCHAR})   BM_SCRAPYN
+		        ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD HH24:MI')   BM_INSERTDATE	
+		        ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD HH24:MI')   BM_UPDATEDATE
+		FROM     UNIFORM_BOARD B, UNIFORM_INFO I
+		WHERE    B.I_NO = I.I_NO
+		AND      B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND      B.BM_DELETEYN = 'Y'	
+	</select>
+		
+	<!-- ======== 글쓰기(insert)구현 ========== -->
+	<insert id="boardInsert"
+			parameterType="bmboard">
+		INSERT INTO UNIFORM_BOARD( BM_NO
+		                          ,I_NO
+		                          ,BM_CATEGORY
+		                          ,BM_SUBJECT
+		                          ,BM_CONTEXT
+		                          ,BM_IMAGE
+		                          ,BM_FILE
+		                          ,BM_VIEW
+		                          ,BM_LIKEY
+		                          ,BM_SCRAP
+		                          ,BM_INSERTDATE
+		                          ,BM_UPDATEDATE
+		                          ,BM_DELETEYN
+             )VALUES(#{bm_no,jdbcType=VARCHAR}
+                    ,#{i_no,jdbcType=VARCHAR}
+                    ,#{bm_category,jdbcType=VARCHAR}
+                    ,#{bm_subject,jdbcType=VARCHAR}
+                    ,#{bm_context,jdbcType=VARCHAR}
+                    ,#{bm_image,jdbcType=VARCHAR}
+                    ,#{bm_file,jdbcType=VARCHAR}
+                    ,#{bm_view,jdbcType=VARCHAR} 
+                    ,#{bm_likey,jdbcType=VARCHAR}
+                    ,#{bm_scrap,jdbcType=VARCHAR}
+                    ,SYSDATE
+                    ,SYSDATE
+                    ,'Y')
+	</insert>
+	
+	<!-- ======== 글수정(update)구현 ========== -->
+	<update id="boardUpdate"
+			parameterType="bmboard">
+		UPDATE   UNIFORM_BOARD B			
+		SET      B.BM_CATEGORY = #{bm_category,jdbcType=VARCHAR}
+		        ,B.BM_SUBJECT = #{bm_subject,jdbcType=VARCHAR}	
+		        ,B.BM_CONTEXT = #{bm_context,jdbcType=VARCHAR}
+		    <if test="bm_image != ''"> 
+		        ,B.BM_IMAGE = #{bm_image,jdbcType=VARCHAR}
+		    </if>
+		   	<if test="bm_file != ''">     
+		        ,B.BM_FILE = #{bm_file,jdbcType=VARCHAR}
+		    </if>
+		        ,B.BM_UPDATEDATE = SYSDATE
+		WHERE  B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND    B.BM_DELETEYN = 'Y'
+	</update>
+	
+	<!-- ======== 글삭제(delete)구현 ====================== -->
+	<update id="boardDelete"
+			parameterType="bmboard">
+		UPDATE   UNIFORM_BOARD B			
+		SET      B.BM_DELETEYN = 'N'
+		        ,B.BM_UPDATEDATE = SYSDATE
+		WHERE  B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND    B.BM_DELETEYN = 'Y'	
+	</update>
+
+	<!-- ======== 게시판 조회수 구현 ====================== -->
+	<update id="viewCount"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_BOARD   B
+		SET     B.BM_VIEW = NVL(B.BM_VIEW, 0) + 1
+		WHERE   B.BM_NO = #{bm_no,jdbcType=VARCHAR}				
+	</update>
+	
+	<!-- ======== 1.게시판 추천여부 조회 ====================== -->
+	<select id="boardLikeyYN"
+			parameterType="bmboard"
+			resultType="bmboard">
+		SELECT 
+		        LK.BM_LIKEYYN   BM_LIKEYYN
+		FROM    UNIFORM_LIKEY   LK
+		WHERE   LK.I_NO = #{i_no,jdbcType=VARCHAR}
+		AND     LK.BM_NO = #{bm_no,jdbcType=VARCHAR}	
+	</select>
+	
+	<!-- ======== 2-1.게시판 추천여부 조회 후 0건이면 insert 하기 ====================== -->
+	<insert id="boardLikeyInsert"
+			parameterType="bmboard">
+		INSERT INTO UNIFORM_LIKEY( I_NO
+		                          ,BM_NO
+		                          ,BM_LIKEYYN
+		             )VALUES( #{i_no,jdbcType=VARCHAR}
+		                     ,#{bm_no,jdbcType=VARCHAR}
+		                     ,'Y')
+	</insert>
+		
+	<!-- ======== 2-2. 좋아요 여부 조회 결과 1건이면서, 값이 'N'일 경우 => 'Y'로 변경하기 ====================== -->
+	<update id="boardLikeyON"
+			parameterType="bmboard">
+		UPDATE 	UNIFORM_LIKEY    LK
+		SET 	LK.BM_LIKEYYN = 'Y'
+		WHERE 	LK.BM_LIKEYYN = 'N'
+		AND		LK.BM_NO	  = #{bm_no,jdbcType=VARCHAR}
+		AND		LK.I_NO		  = #{i_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 2-3. 좋아요 여부 조회 결과 1건이면서, 값이 'Y'일 경우 => 'N'으로 변경하기 ====================== -->
+	<update id="boardLikeyOFF"
+			parameterType="bmboard">
+		UPDATE 	UNIFORM_LIKEY    LK
+		SET 	LK.BM_LIKEYYN = 'N'
+		WHERE 	LK.BM_LIKEYYN = 'Y'
+		AND		LK.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND		LK.I_NO = #{i_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 게시글 좋아요 갯수 카운트 올리기 ====================== -->
+	<update id="boardLikeyUp"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_BOARD   B
+		SET     B.BM_LIKEY = NVL(B.BM_LIKEY, 0) + 1
+		WHERE   B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 게시글 좋아요 갯수 카운트 내리기 ====================== -->
+	<update id="boardLikeyDown"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_BOARD   B
+		SET     B.BM_LIKEY = NVL(B.BM_LIKEY, 0) - 1
+		WHERE   B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+	</update>
+		
+	<!-- ======== 1.게시글 스크랩여부 조회 ====================== -->
+	<select id="boardScrapYN"
+			parameterType="bmboard"
+			resultType="bmboard">
+		SELECT 
+		        SC.BM_SCRAPYN   BM_SCRAPYN
+		FROM    UNIFORM_SCRAP   SC
+		WHERE   SC.I_NO = #{i_no,jdbcType=VARCHAR}
+		AND     SC.BM_NO = #{bm_no,jdbcType=VARCHAR}
+	</select>
+	
+	<!-- ======== 2-0.게시글 스크랩 채번 ====================== -->
+	<select id="scrapNum"
+			resultType="bmboard">
+		SELECT NVL(MAX(SUBSTR(SC.SC_NO, -4)), 0) + 1   SC_NO 
+		FROM UNIFORM_SCRAP SC	
+	</select>
+		
+	<!-- ======== 2-1.게시글 스크랩여부 조회 후 0건이면 insert 하기 ====================== -->
+	<insert id="boardScrapInsert"
+			parameterType="bmboard">
+		INSERT INTO UNIFORM_SCRAP( SC_NO
+		                          ,I_NO
+		                          ,BM_NO
+		                          ,BM_SCRAPYN
+		            )VALUES( #{sc_no,jdbcType=VARCHAR}
+		                    ,#{i_no,jdbcType=VARCHAR}
+		                    ,#{bm_no,jdbcType=VARCHAR}
+		                    ,'Y')
+	</insert>
+		
+	<!-- ======== 2-2. 스크랩여부 여부 조회 결과 1건이면서, 값이 'N'일 경우 => 'Y'로 변경하기 ====================== -->
+	<update id="boardScrapON"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_SCRAP    SC
+		SET     SC.BM_SCRAPYN = 'Y'
+		WHERE   SC.BM_SCRAPYN = 'N'
+		AND	    SC.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND	    SC.I_NO	= #{i_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 2-3. 스크랩여부 여부 조회 결과 1건이면서, 값이 'Y'일 경우 => 'N'으로 변경하기 ====================== -->
+	<update id="boardScrapOFF"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_SCRAP    SC
+		SET     SC.BM_SCRAPYN = 'N'
+		WHERE   SC.BM_SCRAPYN = 'Y'
+		AND	    SC.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		AND	    SC.I_NO	= #{i_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 게시글 스크랩 카운트 올리기 ====================== -->
+	<update id="boardScrapUp"
+			parameterType="bmboard">
+		UPDATE  UNIFORM_BOARD   B
+		SET     B.BM_SCRAP = NVL(B.BM_SCRAP, 0) + 1
+		WHERE   B.BM_NO = #{bm_no,jdbcType=VARCHAR}	
+	</update>
+	
+	<!-- ======== 게시글 스크랩 카운트 내리기 ====================== -->
+	<update id="boardScrapDown"
+			parameterType="bmboard">		
+		UPDATE  UNIFORM_BOARD   B
+		SET     B.BM_SCRAP = NVL(B.BM_SCRAP, 0) - 1
+		WHERE   B.BM_NO = #{bm_no,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- ======== 스크랩 보관함 구현 ================== -->
+	<select id="boardScrapList"
+			parameterType="bmboard"
+			resultType="bmboard">
+			SELECT 
+					L.*
+			FROM (  SELECT
+			             ROWNUM             BM_ROWNUM
+			            ,SC.SC_NO           SC_NO 
+			            ,B.BM_NO            BM_NO
+			            ,B.I_NO             I_NO
+			            ,( SELECT 
+			                    I.I_NAMEKR      I_NAMEKR
+			               FROM UNIFORM_INFO    I 
+			               WHERE I.I_NO = B.I_NO  			)    I_NAMEKR
+			            ,B.BM_CATEGORY      BM_CATEGORY
+			            ,B.BM_SUBJECT       BM_SUBJECT	
+			            ,B.BM_CONTEXT       BM_CONTEXT	
+			            ,B.BM_IMAGE         BM_IMAGE
+			            ,B.BM_FILE          BM_FILE	
+			            ,B.BM_VIEW          BM_VIEW
+			            ,B.BM_LIKEY         BM_LIKEY
+			            ,B.BM_SCRAP         BM_SCRAP
+			            ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+			            ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+			            ,B.BM_DELETEYN     BM_DELETEYN
+			        FROM    UNIFORM_BOARD B, UNIFORM_SCRAP SC
+			        WHERE   B.BM_NO = SC.BM_NO
+			        AND     SC.BM_SCRAPYN = 'Y'
+			        AND     SC.I_NO = #{i_no,jdbcType=VARCHAR}
+			        ORDER BY SC.SC_NO DESC 	)  L
+			WHERE   L.BM_ROWNUM BETWEEN #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR}      
+	</select>	
+			
+	<!-- ======== 페이징 total 구현 ====================== -->
+	<select id="paging"
+			parameterType="bmboard"
+			resultType="int">
+			SELECT 
+					COUNT(1)
+			FROM 	(  SELECT
+				                 ROWNUM             BM_ROWNUM
+				                ,B.BM_NO            BM_NO
+				                ,B.I_NO             I_NO
+				                ,I.I_NAMEKR         I_NAMEKR
+				                ,B.BM_CATEGORY      BM_CATEGORY
+				                ,B.BM_SUBJECT       BM_SUBJECT	
+				                ,B.BM_CONTEXT       BM_CONTEXT	
+				                ,B.BM_IMAGE         BM_IMAGE
+				                ,B.BM_FILE          BM_FILE	
+				                ,B.BM_VIEW          BM_VIEW
+				                ,B.BM_LIKEY         BM_LIKEY
+				                ,B.BM_SCRAP         BM_SCRAP
+				                ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+				                ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+				                ,B.BM_DELETEYN     BM_DELETEYN
+				        FROM     UNIFORM_BOARD B, UNIFORM_INFO I
+				        WHERE    B.I_NO = I.I_NO
+				        AND      B.BM_DELETEYN = 'Y'
+				        ORDER BY B.BM_NO DESC )  L
+			WHERE 	L.BM_DELETEYN = 'Y'
+		<if test="bm_category!=null and bm_category!='' and bm_category!='null' and bm_category!='전체'">
+			AND		L.BM_CATEGORY = #{bm_category,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate!=null and startDate!='' and startDate!='null' and endDate!=null and endDate!='' and endDate!='null'">
+			<![CDATA[AND L.BM_INSERTDATE >= #{startDate,jdbcType=VARCHAR}]]>
+			<![CDATA[AND L.BM_INSERTDATE <= #{endDate,jdbcType=VARCHAR}]]>
+		</if>
+		<if test="searchFilter=='작성자'">
+			<![CDATA[AND L.I_NAMEKR LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="searchFilter=='제목'">
+			<![CDATA[AND L.BM_SUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="searchFilter=='내용'">
+			<![CDATA[AND L.BM_CONTEXT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+		</if>
+		<if test="searchFilter=='제목+내용'">
+			<![CDATA[AND L.BM_SUBJECT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>
+			<![CDATA[OR L.BM_CONTEXT LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%']]>			
+		</if>
+	</select>
+	
+	<!-- ======== 스크랩 페이징 total 구현 ====================== -->
+	<select id="pagingScrap"
+			parameterType="bmboard"
+			resultType="int">
+		SELECT 
+		        COUNT(1)
+		FROM 	(  SELECT
+		                 ROWNUM             BM_ROWNUM
+		                ,SC.SC_NO           SC_NO 
+		                ,B.BM_NO            BM_NO
+		                ,B.I_NO             I_NO
+		                ,( SELECT 
+		                        I.I_NAMEKR      I_NAMEKR
+		                   FROM UNIFORM_INFO    I 
+		                   WHERE I.I_NO = B.BM_NO  )     I_NAMEKR
+		                ,B.BM_CATEGORY      BM_CATEGORY
+		                ,B.BM_SUBJECT       BM_SUBJECT	
+		                ,B.BM_CONTEXT       BM_CONTEXT	
+		                ,B.BM_IMAGE         BM_IMAGE
+		                ,B.BM_FILE          BM_FILE	
+		                ,B.BM_VIEW          BM_VIEW
+		                ,B.BM_LIKEY         BM_LIKEY
+		                ,B.BM_SCRAP         BM_SCRAP
+		                ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+		                ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+		                ,B.BM_DELETEYN     BM_DELETEYN
+		            FROM    UNIFORM_BOARD B, UNIFORM_SCRAP SC
+		            WHERE   B.BM_NO = SC.BM_NO
+		            AND     SC.BM_SCRAPYN = 'Y'
+		            AND     SC.I_NO = #{i_no,jdbcType=VARCHAR}
+		            ORDER BY SC.SC_NO DESC)  L
+		WHERE 	L.BM_DELETEYN = 'Y'
+	</select>
+	
+	<!-- ======== 내가쓴글 구현 ================== -->
+	<select id="boardMyList"
+			parameterType="bmboard"
+			resultType="bmboard">
+		SELECT *
+		FROM (
+		        SELECT
+		                 ROWNUM             BM_ROWNUM
+		                ,B.BM_NO            BM_NO
+		                ,B.I_NO             I_NO
+		                ,(SELECT I.I_NAMEKR I_NAMEKR FROM UNIFORM_INFO I WHERE I.I_NO = B.I_NO)  I_NAMEKR
+		                ,B.BM_CATEGORY      BM_CATEGORY
+		                ,B.BM_SUBJECT       BM_SUBJECT	
+		                ,B.BM_CONTEXT       BM_CONTEXT	
+		                ,B.BM_IMAGE         BM_IMAGE
+		                ,B.BM_FILE          BM_FILE	
+		                ,B.BM_VIEW          BM_VIEW
+		                ,B.BM_LIKEY         BM_LIKEY
+		                ,B.BM_SCRAP         BM_SCRAP
+		                ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+		                ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+		                ,B.BM_DELETEYN     BM_DELETEYN
+		        FROM     UNIFORM_BOARD B
+		        WHERE    B.I_NO = #{i_no,jdbcType=VARCHAR}
+		        AND      B.BM_DELETEYN = 'Y'
+		        ORDER BY B.BM_NO DESC )  L
+		WHERE   L.BM_ROWNUM BETWEEN #{start,jdbcType=VARCHAR} AND #{end,jdbcType=VARCHAR}      
+	</select>
+	
+	<!-- ======== 내가쓴글 페이징 total 구현 ====================== -->
+	<select id="pagingMyList"
+			parameterType="bmboard"
+			resultType="int">
+		SELECT 
+		        COUNT(1)
+		FROM 	(  
+					SELECT
+		                 ROWNUM             BM_ROWNUM
+		                ,B.BM_NO            BM_NO
+		                ,B.I_NO             I_NO
+		                ,(SELECT I.I_NAMEKR I_NAMEKR FROM UNIFORM_INFO I WHERE I.I_NO = B.I_NO)  I_NAMEKR
+		                ,B.BM_CATEGORY      BM_CATEGORY
+		                ,B.BM_SUBJECT       BM_SUBJECT	
+		                ,B.BM_CONTEXT       BM_CONTEXT	
+		                ,B.BM_IMAGE         BM_IMAGE
+		                ,B.BM_FILE          BM_FILE	
+		                ,B.BM_VIEW          BM_VIEW
+		                ,B.BM_LIKEY         BM_LIKEY
+		                ,B.BM_SCRAP         BM_SCRAP
+		                ,TO_CHAR(B.BM_INSERTDATE,'YYYY-MM-DD')   BM_INSERTDATE	
+		                ,TO_CHAR(B.BM_UPDATEDATE,'YYYY-MM-DD')   BM_UPDATEDATE	
+		                ,B.BM_DELETEYN     BM_DELETEYN
+		        FROM     UNIFORM_BOARD B
+		        WHERE    B.I_NO = #{i_no,jdbcType=VARCHAR}
+		        AND      B.BM_DELETEYN = 'Y'
+		        ORDER BY B.BM_NO DESC)  L
+		WHERE 	L.BM_DELETEYN = 'Y'
+	</select>
+</mapper>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.bm.reply.dao.BmReplyDao">
+	
+	<!-- ======== 댓글전체조회 구현 ================== -->
+	<select id="replyList"
+			parameterType="bmreply"
+			resultType="bmreply">
+		SELECT *
+		FROM (
+		        SELECT
+		                ROWNUM                 BM_REROWNUM
+		               ,BR.BM_RENO             BM_RENO
+		               ,BR.BM_NO               BM_NO
+		               ,BR.I_NO                I_NO
+		               ,I.I_NAMEKR             I_NAMEKR
+		               ,BR.BM_RECONTEXT        BM_RECONTEXT
+		               ,TO_CHAR(BR.BM_REINSERTDATE,'YYYY-MM-DD HH24:MI')     BM_REINSERTDATE
+		        FROM     UNIFORM_REPLY BR, UNIFORM_INFO I
+		        WHERE    BR.I_NO = I.I_NO
+		        AND      BR.BM_REDELETEYN = 'Y'
+		        AND      BR.BM_NO = #{bm_no,jdbcType=VARCHAR}
+		        ORDER BY BR.BM_RENO ASC )  L
+		WHERE   L.BM_REROWNUM BETWEEN 1 AND 30
+		<!-- 나중에 start랑 end로 바꾸기 -->		
+	</select>
+				
+	<!-- ======== 댓글채번 구현 ===================== -->
+	<select id="replyNum"
+			resultType="bmreply">
+		SELECT 
+			NVL(MAX(SUBSTR(BR.BM_RENO, -4)), 0) + 1   BM_RENO
+		FROM UNIFORM_REPLY BR
+	</select>
+	
+	<!-- ======== 댓글쓰기 구현 ===================== -->
+	<insert id="replyInsert"
+			parameterType="bmreply">
+		INSERT INTO UNIFORM_REPLY( BM_RENO
+		                          ,BM_NO
+		                          ,I_NO
+		                          ,BM_RECONTEXT
+		                          ,BM_REINSERTDATE
+		                          ,BM_REUPDATEDATE
+		                          ,BM_REDELETEYN
+             )VALUES(#{bm_reno,jdbcType=VARCHAR}
+             		,#{bm_no,jdbcType=VARCHAR}
+                    ,#{i_no,jdbcType=VARCHAR}
+                    ,#{bm_recontext,jdbcType=VARCHAR}
+                    ,SYSDATE
+                    ,SYSDATE
+                    ,'Y')
+	</insert>
+	
+	<!-- ======== 댓글수정 구현 ===================== -->
+	<update id="replyUpdate"
+			parameterType="bmreply">
+		UPDATE							
+		       UNIFORM_REPLY BR			
+		SET							
+		       BR.BM_RECONTEXT = #{bm_recontext,jdbcType=VARCHAR},
+		       BR.BM_REUPDATEDATE = SYSDATE
+		WHERE  BR.BM_REDELETEYN = 'Y'
+		AND    BR.BM_RENO = #{bm_reno,jdbcType=VARCHAR}		
+	
+	</update>
+	
+	<!-- ======== 댓글삭제 구현 ===================== -->
+	<update id="replyDelete"
+			parameterType="bmreply">
+		UPDATE							
+		       UNIFORM_REPLY BR			
+		SET
+		       BR.BM_REDELETEYN = 'N',
+		       BR.BM_REUPDATEDATE = SYSDATE
+		WHERE  BR.BM_REDELETEYN = 'Y'
+		AND    BR.BM_RENO = #{bm_reno,jdbcType=VARCHAR}	
+	</update>
+	<!-- ======== 댓글total 구현 ================== -->
+	<select id="replyPaging"
+			parameterType="bmreply"
+			resultType="int">
+		SELECT 
+		    COUNT(1)
+		FROM (
+		        SELECT
+		                ROWNUM                 BM_REROWNUM
+		               ,BR.BM_RENO             BM_RENO
+		               ,BR.BM_NO               BM_NO
+		               ,BR.I_NO                I_NO
+		               ,I.I_NAMEKR             I_NAMEKR
+		               ,BR.BM_RECONTEXT        BM_RECONTEXT
+		               ,TO_CHAR(BR.BM_REINSERTDATE,'YYYY-MM-DD HH24:MI')     BM_REINSERTDATE
+		        FROM     UNIFORM_REPLY BR, UNIFORM_INFO I
+		        WHERE    BR.I_NO = I.I_NO
+		        AND      BR.BM_REDELETEYN = 'Y'
+		        AND      BR.BM_NO = 'B0013'
+		        ORDER BY BR.BM_RENO ASC )
+	</select>
+
+</mapper>

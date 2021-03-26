@@ -1,0 +1,1134 @@
+@charset "utf-8";
+/***********************************
+ board -- top
+***********************************/
+/* rss */
+.rss {
+	float: left;
+	margin-top: 3px;
+	height: 30px;
+}
+.rss img {
+	float: left;
+	margin-top: 3px;
+}
+.rss p {
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+/**/
+.likey_btn img {
+	width: 25px;
+	height: 25px;
+}
+.scrap_btn img {
+	width: 25px;
+	height: 25px;
+}
+
+
+/* category */
+.category {
+	float: left;
+}
+.category select {
+	width: 110px;
+	/* height: 35px; */
+	border: 1px solid #c3c2c2;
+	padding: 6px 5px 7px 5px;
+	margin-bottom: 5px;
+	vertical-align: middle;
+}
+/* period */
+.period {
+	float: right;
+}
+.period input[type="text"] {
+	width: 110px;
+	height: 28px;
+	line-height: 15px;
+	border: 1px solid #c3c2c2;
+	border-right: 0;
+	vertical-align: middle;
+	padding: 5px 0 0 5px;
+	margin-bottom: 5px;
+}
+/* .period .search_date {
+	background: url('../images/board/bg_search_date.png') 95% center no-repeat;
+} */
+.period .wrap_search input[type="text"] {
+	width: 130px;
+	border-right: 1px solid #c3c2c2;
+}
+.period select {
+	width: 110px;
+	/* height: 35px; */
+	border: 1px solid #c3c2c2;
+	padding: 6px 5px 7px 5px;
+	margin-bottom: 5px;
+	vertical-align: middle;
+}
+.period .search_btn {
+	width: 34px;
+	height: 33px;
+	border: 1px solid #c3c2c2;
+	background: url('../img/btn/search_btn.png') center center no-repeat;
+	text-indent: -5000px;
+	cursor: pointer;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+.period .reset_btn {
+	width: 34px;
+	height: 33px;
+	border: 1px solid #c3c2c2;
+	background: url('../img/btn/reset_btn.png') center center no-repeat;
+	text-indent: -5000px;
+	cursor: pointer;
+	vertical-align: middle;
+	margin-bottom: 5px;
+}
+.period .wrap_date,
+.period .wrap_search {
+	float: left;
+	margin-left: 5px;
+}
+.period a.datePop {
+	border: 1px solid #c3c2c2;
+	border-left: 0;
+	display: inline-block;
+	padding: 6px 7px 7px 0px;
+	vertical-align: top;
+}
+.period a.datePop img {
+	display: block;
+	vertical-align: middle;
+}
+.wrap_search label {
+	font-size: 0;
+	line-height: 0;
+}
+/***********************************
+ board -- paging
+***********************************/
+.paging {
+	overflow: hidden;
+	text-align: center;
+	margin: 20px 0;
+}
+.paging span {
+	display: inline-block;
+	width: 40px;
+	height: 34px;
+	text-indent: -5000px;
+	background: url('../images/board/btn_paging.gif') left top no-repeat;
+	vertical-align: middle;
+}
+.paging span a {
+	display: block;
+	height: 34px;
+}
+.paging span.btnPrev {
+	background-position: -40px top;
+	margin-left: -5px;
+}
+.paging span.btnNext {
+	background-position: -80px top;
+	margin-right: -5px;
+}
+.paging span.btnEnd {
+	background-position: right top;
+}
+.paging ul {
+	display: inline-block;
+	vertical-align: middle;
+}
+.paging ul li {
+	float: left;
+	width: 39px;
+	height: 34px;
+	line-height: 34px;
+	margin: 0 3px;
+}
+.paging ul li a {
+	color: #444;
+	height: 34px;
+	line-height: 34px;
+	display: block;
+	font-size: 1.15em;
+	font-weight: bold;
+}
+.paging ul li.on a {
+	color: #077ee2;
+	height: 34px;
+	line-height: 34px;
+	text-decoration: underline;
+}
+/***********************************
+ board -- normal
+***********************************/
+.board_normal ul.list_post li {
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+}
+.board_normal ul.list_post li:first-child {
+	border-top: 2px solid #575050;
+}
+.board ul.list_post .post,
+.board ul.list_post .num,
+.board ul.list_post .thumb,
+.board ul.list_post .post .title,
+.board ul.list_post .post .post_info,
+.board ul.list_post .post .post_info dl,
+.board ul.list_post .post .post_info dl dt, 
+.board ul.list_post .post .post_info dl dd,
+.board ul.list_post .post .answer,
+.board ul.list_post .post .wrap_icon,
+.board ul.list_post .post .wrap_icon .icon_file,
+.board ul.list_post .post .wrap_icon .icon_private {
+	float: left;
+}
+.board_normal ul.list_post li {
+	padding: 20px 15px;
+}
+.board_normal ul.list_post li:hover {
+	background-color: #f3f2f6;
+}
+.board_normal ul.list_post .num {
+	width: 3%;
+	padding: 13px 0;
+	text-align: center;
+	color: #333;
+	font-size: 1.1em;
+	font-weight: 500;
+	margin-right: 15px;
+	vertical-align: middle;
+	position: relative;
+}
+input.chk {
+	position: absolute;
+	top: 3%;
+	margin-right: 0;
+}
+li.summary input.chk,
+li.album input.chk {
+	top: 22%;
+}
+.board_normal ul.list_post .post {
+	width: 90%;
+}
+.board ul.list_post .post .wrap_title {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.board ul.list_post .post .title a {
+	color: #333;
+	font-size: 1.05em;
+	font-weight: bold;
+}
+.board ul.list_post .post .icon_new,
+.board ul.list_post .post .icon_link {
+	vertical-align: middle;
+	margin-left: 7px;
+}
+.board_normal ul.list_post .post .post_content {
+	clear: both;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-height: 40px;
+	margin-bottom: 5px;
+}
+.board ul.list_post .post .post_info dl {
+	background: url('../images/board/line_board_info.gif') right 5px no-repeat;
+	margin-right: 10px;
+	padding-right: 10px;
+}
+.board ul.list_post .post .post_info dl.last {
+	background: none;
+	padding: 0;
+}
+.board ul.list_post .post .post_info dl dd {
+	padding-left: 3px;
+}
+.board_normal ul.list_post .post .icon_file {
+	margin: 3px 5px 0 0;
+}
+.board_normal ul.list_post .post .icon_private {
+	display: block;
+	width: 13px;
+	height: 16px;
+	background: url('../images/board/icon_board_private.png') left top no-repeat;
+	margin: 2px 5px 0 2px;
+	text-indent: -5000px;
+}
+.board_normal ul.list_post .post .icon_private.open { 
+	background-position: left -16px; 
+}
+.board_normal ul.list_post .post .answer {
+	clear: both;
+	min-width: 35px;
+	text-align: center;
+	font-size: 0.9em;
+	color: #fff;
+	background-color: #bbb;
+	padding: 1px 7px 1px 5px;
+	margin-right: 10px;
+}
+.board_normal ul.list_post .post .answer.ing{ background-color: #64b919; }
+.board_normal ul.list_post .post .answer.end{ background-color: #1b85df; }
+
+/* notice */
+.board_normal ul.list_post li.notice {
+	background-color: #f3f2f6;
+}
+.board_normal ul.list_post li.notice .num {
+}
+/* add summary */
+.board_normal ul.list_post li.summary .num {
+	padding: 32px 0;
+}
+/* album */
+.board_normal ul.list_post li.album .num {
+	padding: 28px 0;
+}
+.board_normal ul.list_post .thumb {
+	width: 122px;
+	height: 91px;
+	border: 1px solid #ccc;
+	background: #f6f5f2 url('../images/board/post_thumb.jpg') center center no-repeat;
+	margin-right: 15px;
+	text-indent: -5000px;
+}
+.board_normal ul.list_post .thumb img {
+	display: block;
+	width: 122px;
+	height: 91px;
+}
+.board_normal ul.list_post li.album .post {
+	width: 70%;
+}
+.answer_img {display: inline-block;}
+
+/***********************************
+ board -- album
+***********************************/
+.board_album {
+	overflow: hidden;
+	border-top: 2px solid #575050;
+	padding-top: 40px;
+}
+.board_album ul.list_post li {
+	float: left;
+	width: 23.7%;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	margin-right: 1.2%;
+	margin-bottom: 1.2%;
+}
+.board_album ul.list_post li.n4 {
+	margin-right: 0;
+}
+.board_album ul.list_post li .thumb {
+	background: #f6f5f2 url('../images/board/post_thumb_album.jpg') center center no-repeat;
+	width: 100%;
+	height: 135px;
+	/* height: 225px; */
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+}
+.board_album ul.list_post li .thumb > a {
+	display: block;
+	height: 135px;
+}
+.board_album ul.list_post li .thumb img {
+	width: 100%;
+	height: 100%;
+}
+.board_album ul.list_post .post {
+	padding: 10px 15px;
+}
+.board_album ul.list_post .post .wrap_title {
+	overflow: hidden;
+	margin-bottom: 10px;
+	height: 43px;
+}
+.board_album ul.list_post .post .wrap_title a {
+	color: #333;
+	font-size: 1.05em;
+	font-weight: bold;
+	overflow: hidden;
+}
+.board_album ul.list_post .post .icon_new {
+	vertical-align: middle;
+	margin-left: 7px;
+}
+.board_album ul.list_post .post .post_info dl dt {
+	display: none;
+}
+
+/***********************************
+ board -- FAQ
+***********************************/
+.board_faq ul li {
+	overflow: hidden;
+	position: relative;
+	border: 1px solid #ccc;
+	padding: 20px;
+	margin-bottom: 5px;
+}
+.board_faq ul li.first {
+	border-top: 2px solid #575050;
+}
+.board_faq ul li dl {
+	float: left;
+	width: 95%;
+}
+.board_faq ul li dl span.faq {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	border-radius: 30px;
+	background-color: #9d9fa1;
+	font-weight: bold;
+	font-size: 1.12em;
+	color: #fff;
+	display: block;
+	float: left;
+	margin-right: 10px;
+}
+.board_faq ul li dl dt {
+	color: #444;
+	font-weight: bold;
+	font-size: 1.1em;
+	overflow: hidden;
+}
+.board_faq ul li dl dd {
+	overflow: hidden;
+	display: none;
+}
+.board_faq ul li dl span.content {
+	float: left;
+	width: 90%; 
+	padding: 3px 0;
+}
+.board_faq ul li.on {
+	background-color: #f6f5f2;
+}
+.board_faq ul li.on dl dd {
+	display: block;
+	padding: 15px 0 0;
+}
+.board_faq ul li.on dd span.faq {
+	background-color: #007ae1;
+	height: 27px;
+	padding-top: 3px;
+}
+.board_faq ul li p.btn a {
+	position: absolute;
+	right: 10px;
+	top: 22px;
+	width: 20px;
+	height: 20px;
+	text-indent: -5000px;
+	background: url('../images/board/btn_faq.png') left top no-repeat;
+}
+.board_faq ul li.on p.btn a {
+	background-position: left bottom;
+}
+
+/***********************************
+ board -- ���๰ webzine
+***********************************/
+/* list */
+.board_webzine ul.list_post li {
+	overflow: hidden;
+	border-bottom: 1px solid #ccc;
+	padding: 15px 25px;
+}
+.board_webzine ul.list_post li:hover {
+	background-color: #f3f2f6;
+}
+.board_webzine ul.list_post li.first {
+	border-top: 2px solid #575050;
+}
+.board_webzine ul.list_post li .thumb {
+	border: 1px solid #cdcdcd;
+	background: #f6f5f2;
+	width: 128px;
+	height: 158px;
+	line-height: 155px;
+	float: left;
+	text-align: center;
+	margin-right: 25px;
+	overflow: hidden;
+}
+.board_webzine ul.list_post li .thumb img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+.board_webzine ul.list_post .post {
+	float: left;
+	width: 80%;
+	padding: 5px 0;
+}
+.board_webzine ul.list_post .post .post_content {
+	margin-bottom: 10px;
+}
+.thumb_img_size {
+	width: 88px !important;
+	height: 95px !important;
+}
+/* ���� ��� */
+.board_webzine.inform .post_info {
+	width: 100% !important;
+}
+.board_webzine.inform .post_info dl {
+	overflow: hidden;
+	width: 100%;
+}
+.board_webzine.inform .post_info dl dt {
+	font-weight: bold;
+	background: url('../images/common/bul_01.png') 5px 7px no-repeat;
+	padding-left: 25px;
+	width: 100px;
+}
+.board_webzine.inform .post_info dl dd {
+	float: none !important;
+	margin-bottom: 10px;
+	margin-left: 110px;
+}
+.board_webzine.inform ul.list_post li:hover {
+	background-color: #fff;
+}
+/* view */
+.board_webzine_view {
+	border-top: 2px solid #575050;
+	border-bottom: 1px solid #ccc;
+	padding: 30px 35px 60px;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+.board_webzine_view .thumb {
+	float: left;
+	width: 213px;
+	height: 262px;
+	line-height: 257px;
+	border: 1px solid #ddd;
+	background-color: #f6f5f2;
+	margin-right: 30px;
+	overflow: hidden;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.board_webzine_view .thumb img {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+.board_webzine_view .webzine_content {
+	float: left;
+	width: 70%;
+}
+.board_webzine_view .wrap_title .title {
+	font-weight: bold;
+	color : #444;
+	font-size: 1.5em;
+	margin-bottom: 10px;
+	color: #333 !important;
+}
+.board_webzine_view .wrap_title .post_info {
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+.board_webzine_view .wrap_title .post_info dl {
+	float: left;
+	background: url('../images/board/line_board_info.gif') left 4px no-repeat;
+	margin-right: 10px;
+	padding-left: 10px;
+}
+.board_webzine_view .wrap_title .post_info dl:first-child {
+	background: none;
+	padding: 0;
+}
+.board_webzine_view .wrap_title .post_info dl dt {
+	float: left;
+}
+.board_webzine_view .wrap_title .post_info dl dd {
+	float: left;
+	padding-left: 3px;
+}
+.board_webzine_view .summary {
+	margin-bottom: 30px;
+}
+.board_webzine_view .detail {
+	border-top: 5px solid #567caf;
+	border-bottom: 5px solid #e3e3e3;
+	padding: 30px 20px;
+	margin-bottom: 30px;
+	font-size: 1.05em;
+	color: #3e3e3f;
+}
+.board_webzine_view .detail h4 {
+	font-weight: bold;
+	color: #315c95;
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+.board_webzine_view .detail p {
+	margin-bottom: 20px;
+}
+.board_webzine_view .multi_btn {
+	margin-bottom: 14px;
+}
+.board_webzine_view .multi_btn span {
+	font-size: 0.95em;
+	margin-right: 10px;
+}
+.board_webzine_view .multi_btn a.btn_down,
+.board_webzine_view .multi_btn a.btn_go {
+	background-image: none;
+	float: none;
+	display: inline-block;
+	font-size: 0.85em;
+	padding: 3px 10px;
+	margin: 0 0px 3px 0;
+}
+/***********************************
+ board -- View page
+***********************************/
+.board_view .wrap_title .title {
+	border-top: 2px solid #575050;
+	border-bottom: 1px solid #ccc;
+	color: #333;
+	line-height: 1.2;
+	font-size: 16px;
+	font-size: 1.18em;
+	font-weight: bold;
+	padding: 15px 10px;
+}
+.board_view .wrap_title .post_info {
+	overflow: hidden;
+	border-bottom: 1px solid #7f7f7f;
+	padding: 12px 10px;
+}
+.board_view .wrap_title .post_info dl {
+	float: left;
+	background: url('../images/board/line_board_info.gif') left 4px no-repeat;
+	margin-right: 10px;
+	padding-left: 10px;
+}
+.board_view .wrap_title .post_info dl.first {
+	background: none;
+	padding: 0;
+}
+.board_view .wrap_title .post_info dl.last {
+	background: none;
+	margin: 0;
+}
+.board_view .wrap_title .post_info dl dt {
+	float: left;
+}
+.board_view .wrap_title .post_info dl dd {
+	float: left;
+	padding-left: 3px;
+}
+.board_view .post_content {
+	color: #444;
+	border-bottom: 1px solid #ccc;
+	padding: 20px 10px;
+	min-height: 100px;
+	word-break: break-all;
+}
+.board_view .wrap_file {
+	border-bottom: 1px solid #ccc;
+	padding: 15px 0;
+	overflow: hidden;
+}
+.board_view .wrap_file p.title {
+	float: left;
+	background: #7a888d;
+	color: #fff !important;
+	font-size: 0.9em;
+	font-weight: bold;
+	padding: 3px 10px;
+	margin-right: 25px;
+}
+.board_view .wrap_file ul {
+	float: left;
+}
+.board_view .wrap_file ul li {
+	margin-bottom: 5px;
+}
+.board_view .wrap_file ul li.last {
+	margin-bottom: 0;
+}
+.board_view .wrap_file ul li span{
+	display: block;
+	float: left;
+	background: url('../images/board/icon_board_file.png') left top no-repeat;
+	width: 15px;
+	height: 14px;
+	margin-top: 3px;
+	margin-right: 10px;
+	text-indent: -5000px;
+}
+.board_view .wrap_file ul li a {
+	text-decoration: underline;
+	color: #666;
+}
+/* answer ��� */
+.wrap_answer {
+	position: relative;
+	border: 1px solid #d9e0e3 ;
+	border-top: 2px solid #575050;
+	padding: 20px 15px;
+}
+.wrap_answer .icon_answer {
+	display: block;
+	position: absolute;
+	top: -2px;
+	background: url('../images/board/icon_board_view_answer.png') left top no-repeat;
+	width: 36px;
+	height: 37px;
+	color: #fff;
+	line-height: 34px;
+	text-align: center;
+	font-weight: bold;
+}
+.wrap_answer .wrap_title {
+	margin-left: 60px;
+	margin-bottom: 15px;
+	overflow: hidden;
+}
+.wrap_answer .wrap_title .title{
+	color: #333;
+	line-height: 1.2;
+	font-size: 16px;
+	font-size: 1.18em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.wrap_answer .wrap_title .answer_info dl {
+	float: left;
+	background: url('../images/board/line_board_info.gif') left 4px no-repeat;
+	margin-right: 10px;
+	padding-left: 10px;
+}
+.wrap_answer .wrap_title .answer_info dl.first {
+	background: none;
+	padding: 0;
+}
+.wrap_answer .wrap_title .answer_info dl dt {
+	float: left;
+}
+.wrap_answer .wrap_title .answer_info dl dd {
+	float: left;
+	padding-left: 3px;
+}
+.wrap_answer .answer_content {
+	color: #444;
+	background-color: #f2f2f2;
+	padding: 20px 25px;
+	margin-bottom: 15px
+}
+/* �ٹ� view page */
+.board_view .post_content img {
+	display: block;
+	max-width: 810px;
+	margin: 0 auto;
+}
+/* page navigation */
+.page_nav {
+	border: 1px solid #ccc;
+	border-top: 1px solid #7f7f7f;
+	overflow: hidden;
+}
+.page_nav div {
+	float: left;
+	width: 50%;
+}
+.page_nav div a {
+	color: #444;
+	font-size: 1.04em;
+	display: block;
+	padding: 18px 0;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.page_nav .prev {
+	background: url('../images/board/btn_pagenav_prev.gif') left 0 no-repeat;
+}
+.page_nav .prev a {
+	border-right: 1px solid #ccc;
+	padding-left: 80px;
+	padding-right: 10px;
+}
+.page_nav .next {
+	background: url('../images/board/btn_pagenav_next.gif') right 0 no-repeat;
+}
+.page_nav .next a {
+	text-align: right;
+	padding-right: 80px;
+	padding-left: 10px;
+}
+
+/***********************************
+ board -- Write page
+***********************************/
+.board_write {
+	border-bottom: 1px solid #7f7f7f;
+}
+.board_write .post_info dl {
+	border-bottom: 1px solid #ccc;
+	background-color: #fcfcfc;
+	color: #444;
+	line-height: 29px;
+	padding: 10px 30px 5px;
+	overflow: hidden;
+}
+.board_write .post_info dl.first {
+	border-top: 2px solid #575050;
+}
+.board_write .post_info dl.first dt {
+	line-height: 61px;
+}
+.board_write .post_info dl dt {
+	float: left;
+	font-size: 1.05em;
+	font-weight: bold;
+	width: 100px;
+	background: url('../images/board/line_board_write.gif') right center repeat-y;
+}
+.board_write .post_info dl dd {
+	padding: 0 0 4px 105px;
+}
+.board_write .post_info dl dd input[type="radio"] {
+	margin-bottom: 2px;
+}
+.board_write .post_info dl dd .bg {
+	background: url('../images/board/line_board_info02.gif') right 6px no-repeat;
+	padding-right: 10px;
+	margin-right: 5px;
+}
+.board_write .post_info dl dd .bgL {
+	background: url('../images/board/line_board_info02.gif') left 6px no-repeat;
+	padding-left: 11px;
+	margin-left: 10px;
+}
+.board_write .post_info dl.first dd input[type="text"]{
+	height: 22px;
+	vertical-align: middle;
+}
+.board_write .post_info dl dd input[type="text"],
+.board_write .post_info dl dd input[type="password"] {
+	height: 28px;
+	border: 1px solid #cdcdcd;
+	padding-left: 5px;
+}
+.board_write .post_info dl dd select {
+	height: 30px;
+	border: 1px solid #cdcdcd;
+}
+.board_write .post_info dl.longCon dt {
+	float: none;
+	width: 100%;
+	display: block;
+	background: none;
+}
+.board_write .post_info dl.longCon dd {
+	width: 100%;
+	padding: 0;
+}
+.board_write .editor textarea {
+	min-height: 480px;
+	max-width: 893px;
+	padding: 10px;
+}
+.board_write .wrap_file {
+	color: #333;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	background-color: #fcfcfc;
+	padding: 5px 0 5px 30px;
+}
+.board_write .wrap_file dl dt {
+	float: left;
+	font-size: 1.05em;
+	font-weight: bold;
+	width: 90px;
+	line-height: 81px;
+	background: url('../images/board/line_board_write.gif') right center repeat-y;
+}
+.board_write .wrap_file dl dt.oneFile {
+	line-height: 22px;
+}
+.board_write .wrap_file dl dd {
+	padding-left: 15px;
+	overflow: hidden;
+}
+.board_write .wrap_file dl dd select {
+	float: left;
+	width: 50%;
+	height: 81px;
+	border: 1px solid #ccc;
+	padding: 5px 10px;
+	overflow-y: scroll;
+}
+.board_write .wrap_file dl dd option {
+	background: url('../images/board/icon_board_file.png') left 4px no-repeat;
+	padding-left: 22px;
+	padding-bottom: 5px;
+}
+.board_write .wrap_file dl dd ul li a {
+	text-decoration: underline;
+	color: #666;
+}
+.board_write .wrap_file dl dd .load_file {
+	float: left;
+	margin-left: 10px;
+}
+.board_write .wrap_file .load_file a {
+	display: block;
+	background: url('../images/board/bg_board_file.gif') left top no-repeat; 
+	width: 94px;
+	height: 23px;
+	color: #333;
+	font-size: 0.9em;
+	padding: 2px 0 0 15px;
+}
+.board_write.album dl.first dt {
+	line-height: 30px;
+}
+.board_write.album .wrap_file {
+	border-top: 0;
+}
+.board_write.album .wrap_thumb{
+	overflow: hidden;
+	color: #333;
+	border-bottom: 1px solid #ccc;
+	background-color: #fcfcfc;
+	padding: 0 0 0 30px;
+}
+/* .board_write.album .wrap_thumb dl {
+	float: left;
+	width: 50%;
+} */
+.board_write.album .wrap_thumb dl {
+	margin: 15px 0;
+}
+.board_write.album .wrap_thumb dl dt {
+	float: left;
+	font-size: 1.05em;
+	font-weight: bold;
+	line-height: 27px;
+	width: 90px;
+	background: url('../images/board/line_board_write.gif') right center repeat-y;
+}
+.board_write.album .wrap_thumb dl dd {
+	padding-left: 15px;
+	overflow: hidden;
+}
+.board_write.album .wrap_thumb input[type="text"] {
+	height: 27px;
+	border: 1px solid #cdcdcd;
+	padding-left: 5px;
+}
+
+/***********************************
+ board -- movie ������ ����
+***********************************/
+.movie_news {
+	margin-bottom: 60px;
+}
+.movie_news ul {
+	overflow: hidden;
+}
+.movie_news ul li {
+	float: left;
+	width: 18.8%;
+	border: 1px solid #ccc;
+	overflow: hidden;
+	margin-right: 1.2%;
+	margin-bottom: 1.2%;
+}
+.movie_news ul li.n5 {
+	margin-right: 0;
+}
+.movie_news ul li img {
+	width: 100%;
+	height: auto;
+}
+.movie_news .post_info {
+	padding: 5px;
+	text-align: center;
+}
+.movie_news .post_info .title {
+	overflow: hidden;
+	margin-bottom: 5px;
+	height: 42px;
+	color: #333 !important;
+	font-weight: bold;
+}
+.movie_news .post_info dl dt {
+	display: none;
+}
+/***********************************
+ board -- respond
+***********************************/
+/* tablet */
+body.tablet .board_view .post_content img {
+	max-width: 100%;
+	height: auto;
+}
+body.tablet .board_normal ul.list_post li.album .post {
+	width: 50%;
+}
+body.tablet .board_write .wrap_file dl dd select {width: 60%;}
+body.tablet .board_write .post_info dl dd input[type="text"] {width: 95%;}
+body.tablet .board_write textarea {width: 95% !important;}
+
+body.tablet .board_webzine.inform ul.list_post li .thumb {
+	margin-bottom: 10px;
+}
+body.tablet .board_webzine.inform .post {
+	width: 100% !important;
+}
+body.tablet .board_album ul.list_post li {
+	width: 48%;
+}
+body.tablet .movie_news ul li {
+	width: 32%;
+}
+body.tablet .movie_news ul li.n3 {
+	margin-right: 0;
+}
+body.tablet .movie_news ul li.n5 {
+	margin-right: 1.2%;
+}
+/* ------------------- webzine --*/
+/* board _ webzine _ list */
+body.mobile .board ul.list_post .post .wrap_title {
+	text-align: left !important;
+}
+body.mobile .board ul.list_post .post .wrap_title .title {
+	float: none;
+	display: inline-block;
+}
+body.tablet .board_webzine ul.list_post .post {
+	width: 71%;
+}
+body.mobile .board_webzine ul.list_post .post {
+	width: 100%;
+}
+body.mobile .board_webzine ul.list_post li .thumb {
+	float: none;
+	margin: 0 auto 10px;
+}
+/* board _ webzine _ view */
+body.desktop02 .board_webzine_view .webzine_content {
+	width: 100%;
+}
+body.tablet .board_webzine_view {
+	padding: 30px 0 60px;
+}
+body.tablet .board_webzine_view .thumb{
+	margin-bottom: 30px;
+}
+body.mobile .board_webzine_view .thumb{
+	margin: 0 auto 10px;
+	float: none;
+}
+body.tablet .board_webzine_view .webzine_content,
+body.mobile .board_webzine_view .webzine_content {
+	float: none;
+	width: 100%;
+}
+body.tablet .board_webzine_view .detail {
+	clear: both;
+}
+body.desktop03 .board_webzine_view .webzine_content {
+	width: 100%;
+	margin-top: 10px;
+}
+
+/* mobile */
+body.mobile .paging ul li {
+	width: 17px;
+}
+body.mobile .num {display: none;}
+body.mobile .rss,
+body.mobile .period {float: none;}
+body.mobile .period .wrap_date,
+body.mobile .period .wrap_search {
+	margin-left: 0;
+	float: right;
+}
+/* body.mobile .board ul.list_post .post .post_info dl {
+	clear: both;
+	background: none;
+} */
+body.mobile .board_normal ul.list_post .post {
+	width: 99% !important;
+}
+body.mobile .board_album ul.list_post li {
+	width: 99%;
+}
+body.mobile ul.list_post li.album .thumb,
+body.mobile ul.list_post li.album .thumb img {
+	width: 100%;
+	height: auto;
+	min-height: 150px;
+}
+body.mobile .board_album ul.list_post li .thumb,
+body.mobile .board_album ul.list_post li .thumb a {
+	height: 225px;
+}
+
+body.mobile .board ul.list_post .post .wrap_title {
+	margin-top: 5px;
+	height: auto;
+}
+body.mobile .board_write .wrap_file dl dd select {width: 100%;}
+body.mobile .board_write .wrap_file dl dd .load_file {
+	margin-left: 0;
+	margin-top: 10px;
+}
+body.mobile .board_write .post_info dl dd input[type="text"], 
+body.mobile .board_write .post_info dl dd input[type="password"] {
+	display:block;
+}
+body.mobile .board_write .post_info dd input[type="checkbox"] { 
+	margin-top: 9px;
+	float: left;
+}
+body.mobile .board_write .post_info dd input[type="checkbox"] + label {
+	display: block;
+}
+body.mobile label.bg,
+body.mobile label.bgL {
+	background: none !important;
+	padding-left: 0 !important;
+	margin-left: 0 !important;
+}
+body.mobile .board_webzine.inform ul.list_post li .thumb {
+	margin-bottom: 10px;
+	float: none;
+	margin: 0 auto 10px;
+}
+body.mobile .board_webzine.inform .post_info dl dd { 
+	float: none !important;
+	margin-left: 23px;
+}
+body.mobile .board_webzine.inform .post_info dl dt {
+	float: none !important;
+} 
+body.mobile .movie_news ul li {
+	width: 99%;
+	margin-right: 0;
+}
+body.mobile .movie_news .post_info .title {
+	height: auto;
+}

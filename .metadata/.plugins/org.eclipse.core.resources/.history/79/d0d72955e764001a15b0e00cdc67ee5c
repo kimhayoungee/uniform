@@ -1,0 +1,36 @@
+package com.uniform.si.info.controller;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.uniform.common.info.service.CommonInfoService;
+import com.uniform.em.common.vo.EmCommonVO;
+
+@Controller
+@RequestMapping("/si")
+public class SiInfoController {
+	
+	private Logger logger = Logger.getLogger(SiInfoController.class);
+	
+	@Autowired
+	private CommonInfoService commonInfoService;
+	
+	@RequestMapping("/siMain")
+	public ModelAndView siMain(){
+		logger.info("siMain 호출 성공");
+		
+		EmCommonVO miniVO = commonInfoService.miniInfo(ecvo);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("miniVO",miniVO);
+		mav.setViewName("si/siMain");
+		
+		return mav;
+	}// end of siMain() 함수
+
+}// end of SiInfoController class

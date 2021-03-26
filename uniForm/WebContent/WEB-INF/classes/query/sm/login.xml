@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.sm.log.dao.SmLoginDao">
+
+	<select id="login" parameterType="emcommon" resultType="emcommon">
+		
+		SELECT 
+			  E.I_NO I_NO
+		FROM  UNIFORM_EMP E
+		WHERE E.I_NO  = #{i_no}
+		AND   E.EM_PW = #{em_pw}
+		AND   (SELECT I.I_DELETEYN
+			   FROM   UNIFORM_INFO I
+			   WHERE  I.I_NO = #{i_no}) = 'Y'
+		
+	</select>
+
+</mapper>

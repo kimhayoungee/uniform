@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.uniform.em.common.dao.EmCommonDao">
+
+	<update id="addSign" parameterType="emcommon">
+	
+		UPDATE UNIFORM_EMP
+		SET    EM_SIGN = #{em_sign}
+		WHERE  I_NO = #{i_no}
+	
+	</update>
+	
+	<update id="updateDate" parameterType="emcommon">
+	
+		UPDATE UNIFORM_INFO
+		SET    I_UPDATEDATE = SYSDATE
+		WHERE  I_NO = #{i_no}
+	
+	</update>
+	
+	<select id="passwordChk" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT
+		      E.EM_PW EM_PW
+		FROM  UNIFORM_EMP E
+		WHERE E.I_NO  = #{i_no}
+		AND   E.EM_PW = #{em_pw}
+		
+	</select>
+	
+	<update id="updatePw" parameterType="emcommon">
+	
+		UPDATE UNIFORM_EMP
+		SET    EM_PW  = #{em_pw}
+		WHERE  I_NO   = #{i_no}
+	
+	</update>
+	
+	<update id="updateMm" parameterType="mmsetting">
+	
+		UPDATE UNIFORM_SETTING
+		SET    MM_MESSAGE = #{mm_message}
+			  ,MM_ALARM   = #{mm_alarm}
+		WHERE  I_NO = #{i_no}	  
+	
+	</update>
+	
+	<update id="updateInfo" parameterType="emcommon">
+	
+		UPDATE UNIFORM_INFO
+		<trim prefix="SET" prefixOverrides=",">
+			<if test="i_hp != null and i_hp != ''">
+				I_HP = #{i_hp}
+			</if>
+			
+			<if test="i_tel != null and i_tel != ''">
+				I_TEL = #{i_tel}
+			</if>
+			
+			<if test="i_mail != null and i_mail != ''">
+				I_MAIL = #{i_mail}
+			</if>
+			
+			<if test="i_postNo != null and i_postNo != ''">
+				I_POSTNO = #{i_postNo}
+			</if>
+			
+			<if test="i_doro != null and i_doro != ''">
+				,I_DORO = #{i_doro}
+			</if>
+			
+			<if test="i_jibun != null and i_jibun != ''">
+				,I_JIBUN = #{i_jibun}
+			</if>
+			
+			<if test="i_detail != null and i_detail != ''">
+				,I_DETAIL = #{i_detail}
+			</if>
+		</trim>
+		WHERE I_NO = #{i_no}
+		
+	</update>
+	
+	<select id="searchName" parameterType="emcommon" resultType="emcommon">
+	
+		SELECT
+			  I.I_NO     I_NO
+			 ,I.I_NAMEKR I_NAMEKR
+		FROM UNIFORM_INFO I
+		WHERE I.I_DELETEYN = 'Y'
+		AND   I.I_NAMEKR LIKE '%' || #{i_nameKr} || '%'
+		AND   SUBSTR(I.I_NO,1,1) != 'S'
+		
+	</select>
+	
+	<select id="empChaebun" resultType="emcommon">
+	
+		SELECT NVL(MAX(SUBSTR(E.I_NO,-4)),0)+1 I_NO
+		FROM   UNIFORM_EMP E
+	
+	</select>
+	
+	<insert id="insertInfo" parameterType="emcommon">
+		INSERT INTO UNIFORM_INFO( I_NO,
+		                          I_NAMEKR,
+		                          I_FIRSTNAME,
+		                          I_LASTNAME,
+		                          I_BIRTH,
+		                          I_RRN,
+		                          I_GENDER,
+		                          I_HP,
+		                          I_TEL,
+		                          I_MAIL,
+		                          I_POSTNO,
+		                          I_DORO,
+		                          I_DETAIL,
+		                          I_JIBUN,
+		                          I_INSERTDATE,
+		                          I_UPDATEDATE,
+		                          I_DELETEYN)
+                          
+		VALUES( #{i_no},
+		        #{i_nameKr},
+		        #{i_firstName},
+		        #{i_lastName},
+		        #{i_birth},
+		        #{i_rrn},
+		        #{i_gender},
+		        #{i_hp},
+		        #{i_tel},
+		        #{i_mail},
+		        #{i_postNo},
+		        #{i_doro},
+		        #{i_detail},
+		        #{i_jibun},
+		        SYSDATE,
+		        SYSDATE,
+		        'Y')
+	
+	</insert>
+	
+	<insert id="insertEmp" parameterType="emcommon">
+	
+		INSERT INTO UNIFORM_EMP( I_NO,
+		                         EM_PW,
+		                         EM_HIREDATE,
+		                         EM_IMG,
+		                         EM_DEPT,
+		                         EM_TEAM,
+		                         EM_POSITION,
+		                         EM_MILITARY,
+		                         EM_MNO,
+		                         EM_MSTART,
+		                         EM_MEND,
+		                         EM_EXEMP,
+		                         EM_ACADEMIC)
+		VALUES( #{i_no},
+		        #{i_birth},
+		        #{em_hireDate},
+		        #{em_img},
+		        #{em_dept},
+		        #{em_team},
+		        #{em_position},
+		        #{em_military},
+		        #{em_mNo},
+		        #{em_mStart},
+		        #{em_mEnd},
+		        #{em_exemp},
+		        #{em_academic})
+	
+	</insert>
+	
+	<insert id="insertSetting" parameterType="emcommon">
+	
+		INSERT INTO UNIFORM_SETTING( I_NO )
+		VALUES(#{i_no})
+	
+	</insert>
+	
+	<update id="updateEmp" parameterType="emcommon">
+	
+		UPDATE UNIFORM_EMP E
+		SET  E.EM_HIREDATE = #{em_hireDate}
+			,E.EM_IMG      = #{em_img}
+			,E.EM_DEPT     = #{em_dept}
+			,E.EM_POSITION = #{em_position}
+			,E.EM_TEAM     = #{em_team}
+			,E.EM_MILITARY = #{em_military}
+			,E.EM_MNO      = #{em_mNo}
+			,E.EM_MSTART   = #{em_mStart}
+			,E.EM_MEND     = #{em_mEnd}
+			,E.EM_EXEMP    = #{em_exemp}
+			,E.EM_ACADEMIC = #{em_academic}
+		WHERE E.I_NO       = #{i_no}	
+	
+	</update>
+	
+	<update id="updateEInfo" parameterType="emcommon">
+	
+		UPDATE UNIFORM_INFO I
+		SET  I.I_NAMEKR    = #{i_nameKr}
+			,I.I_FIRSTNAME = #{i_firstName}
+			,I.I_LASTNAME  = #{i_lastName}
+			,I.I_BIRTH     = #{i_birth}
+			,I.I_RRN       = #{i_rrn}
+			,I.I_HP        = #{i_hp}
+			,I.I_TEL       = #{i_tel}
+			,I.I_MAIL      = #{i_mail}
+			,I.I_POSTNO    = #{i_postNo}
+			,I.I_DORO      = #{i_doro}
+			,I.I_JIBUN     = #{i_jibun}
+			,I.I_DETAIL    = #{i_detail}
+		WHERE I.I_NO       = #{i_no}	
+	
+	</update>
+	
+	<update id="deleteEmp" parameterType="emcommon">
+	
+		UPDATE UNIFORM_INFO I
+		SET    I.I_DELETEYN   = 'N'
+		      ,I.I_UPDATEDATE = SYSDATE
+		WHERE  I.I_NO = #{i_no}    
+	
+	</update>
+
+</mapper>

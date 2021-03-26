@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.uniform.pm.plan.dao.PmPlanDao">
+	
+	<!-- ======= 전체조회(개인) ============================== -->
+	<select id="myPlanList" 
+			parameterType="plan" 
+			resultType="plan">
+		SELECT
+		     P.PM_NO              PM_NO
+		    ,P.I_NO               I_NO
+		    ,I.I_NAMEKR           I_NAMEKR
+		    ,P.PM_TITLE           PM_TITLE
+		    ,P.PM_START           PM_START
+		    ,P.PM_END             PM_END
+		    ,P.PM_CONTEXT         PM_CONTEXT
+		    ,P.PM_ALLDAY          PM_ALLDAY
+		    ,P.PM_BACKGROUNDCOLOR PM_BACKGROUNDCOLOR
+		    ,P.PM_TEXTCOLOR       PM_TEXTCOLOR
+		    ,P.PM_SHARE           PM_SHARE
+		    ,P.PM_DEPT            PM_DEPT
+		    ,P.PM_PLACE           PM_PLACE
+		    ,P.PM_ALARM           PM_ALARM
+		    ,P.PM_ALARMTIME       PM_ALARMTIME
+		    ,P.PM_MESSAGE         PM_MESSAGE
+		    ,P.PM_RECIPIENT       PM_RECIPIENT
+		    ,TO_CHAR(P.PM_INSERTDATE,'YYYY-MM-DD')      PM_INSERTDATE
+		    ,TO_CHAR(P.PM_UPDATEDATE,'YYYY-MM-DD')      PM_UPDATEDATE
+		    ,P.PM_DELETEYN        PM_DELETEYN
+		FROM UNIFORM_PLANNER P, UNIFORM_INFO I
+		WHERE <![CDATA[SUBSTR(TO_CHAR(TO_DATE(SUBSTR(P.PM_START,1,10)),'YYYY-MM-DD'),1,7) >= #{pm_start,jdbcType=VARCHAR}]]>
+		AND   <![CDATA[SUBSTR(TO_CHAR(TO_DATE(SUBSTR(P.PM_END,1,10)),'YYYY-MM-DD'),1,7) <= #{pm_end,jdbcType=VARCHAR}]]>
+		AND 	P.I_NO = I.I_NO
+		AND 	P.PM_SHARE = '개인'
+		AND 	P.I_NO = #{i_no,jdbcType=VARCHAR}
+		AND 	P.PM_DELETEYN = 'Y'
+		ORDER BY P.PM_NO ASC
+	</select>
+	
+	<!-- ======= 전체조회(!개인) ============================== -->
+	<select id="notMyPlanList" 
+			parameterType="plan" 
+			resultType="plan">
+		SELECT
+		     P.PM_NO              PM_NO
+		    ,P.I_NO               I_NO
+		    ,I.I_NAMEKR           I_NAMEKR
+		    ,P.PM_TITLE           PM_TITLE
+		    ,P.PM_START           PM_START
+		    ,P.PM_END             PM_END
+		    ,P.PM_CONTEXT         PM_CONTEXT
+		    ,P.PM_ALLDAY          PM_ALLDAY
+		    ,P.PM_BACKGROUNDCOLOR PM_BACKGROUNDCOLOR
+		    ,P.PM_TEXTCOLOR       PM_TEXTCOLOR
+		    ,P.PM_SHARE           PM_SHARE
+		    ,P.PM_DEPT            PM_DEPT
+		    ,P.PM_PLACE           PM_PLACE
+		    ,P.PM_ALARM           PM_ALARM
+		    ,P.PM_ALARMTIME       PM_ALARMTIME
+		    ,P.PM_MESSAGE         PM_MESSAGE
+		    ,P.PM_RECIPIENT       PM_RECIPIENT
+		    ,TO_CHAR(P.PM_INSERTDATE,'YYYY-MM-DD')      PM_INSERTDATE
+		    ,TO_CHAR(P.PM_UPDATEDATE,'YYYY-MM-DD')      PM_UPDATEDATE
+		    ,P.PM_DELETEYN        PM_DELETEYN
+		FROM UNIFORM_PLANNER P, UNIFORM_INFO I
+		WHERE <![CDATA[SUBSTR(TO_CHAR(TO_DATE(SUBSTR(P.PM_START,1,10)),'YYYY-MM-DD'),1,7) >= #{pm_start,jdbcType=VARCHAR}]]>
+		AND   <![CDATA[SUBSTR(TO_CHAR(TO_DATE(SUBSTR(P.PM_END,1,10)),'YYYY-MM-DD'),1,7) <= #{pm_end,jdbcType=VARCHAR}]]>
+		AND 	P.I_NO = I.I_NO
+		AND 	P.PM_SHARE != '개인'
+		AND 	P.PM_DELETEYN = 'Y'
+		ORDER BY P.PM_NO ASC
+	</select>	
+	
+	<!-- ======= 상세조회 ============================== -->
+	<select id="planDetail" 
+			parameterType="plan" 
+			resultType="plan">
+		SELECT
+		     P.PM_NO              PM_NO
+		    ,P.I_NO               I_NO
+		    ,I.I_NAMEKR           I_NAMEKR
+		    ,P.PM_TITLE           PM_TITLE
+		    ,P.PM_START           PM_START
+		    ,P.PM_END             PM_END
+		    ,P.PM_CONTEXT         PM_CONTEXT
+		    ,P.PM_ALLDAY          PM_ALLDAY
+		    ,P.PM_BACKGROUNDCOLOR PM_BACKGROUNDCOLOR
+		    ,P.PM_TEXTCOLOR       PM_TEXTCOLOR
+		    ,P.PM_SHARE           PM_SHARE
+		    ,P.PM_DEPT            PM_DEPT
+		    ,P.PM_PLACE           PM_PLACE
+		    ,P.PM_ALARM           PM_ALARM
+		    ,P.PM_ALARMTIME       PM_ALARMTIME
+		    ,P.PM_MESSAGE         PM_MESSAGE
+		    ,P.PM_RECIPIENT       PM_RECIPIENT
+		    ,TO_CHAR(P.PM_INSERTDATE,'YYYY-MM-DD')      PM_INSERTDATE
+		    ,TO_CHAR(P.PM_UPDATEDATE,'YYYY-MM-DD')      PM_UPDATEDATE
+		    ,P.PM_DELETEYN        PM_DELETEYN
+		FROM UNIFORM_PLANNER P, UNIFORM_INFO I
+		WHERE  P.I_NO = I.I_NO
+		AND P.PM_NO = #{pm_no,jdbcType=VARCHAR}
+		AND P.PM_DELETEYN = 'Y'
+	</select>
+	
+	<!-- ======= 일정 채번 ============================== -->
+	<select id="planChaebun"
+			parameterType="plan"
+			resultType="plan">
+		SELECT 
+			NVL(MAX(SUBSTR(P.PM_NO, -4)), 0) + 1	PM_NO  
+		FROM UNIFORM_PLANNER	P
+	</select>
+	
+	<!-- ======= 일정등록 ============================== -->
+	<insert id="planInsert"
+			parameterType="plan">
+		INSERT INTO UNIFORM_PLANNER( PM_NO
+		                            ,I_NO
+		                            ,PM_TITLE   
+		                            ,PM_START          
+		                            ,PM_END            
+		                            ,PM_CONTEXT        
+		                            ,PM_ALLDAY         
+		                            ,PM_BACKGROUNDCOLOR 
+		                            ,PM_TEXTCOLOR      
+		                            ,PM_SHARE        
+		                            ,PM_DEPT         
+		                            ,PM_PLACE       
+		                            ,PM_ALARM       
+		                            ,PM_ALARMTIME     
+		                            ,PM_MESSAGE    
+		                            ,PM_RECIPIENT     
+		                            ,PM_INSERTDATE  
+		                            ,PM_UPDATEDATE 
+		                            ,PM_DELETEYN
+		             )VALUES(#{pm_no,jdbcType=VARCHAR}
+		                    ,#{i_no,jdbcType=VARCHAR}
+		                    ,#{pm_title,jdbcType=VARCHAR}
+		                    ,#{pm_start,jdbcType=VARCHAR}
+		                    ,#{pm_end,jdbcType=VARCHAR}
+		                    ,#{pm_context,jdbcType=VARCHAR}
+		                    ,#{pm_allDay,jdbcType=VARCHAR} 
+		                    ,#{pm_backgroundColor,jdbcType=VARCHAR}
+		                    ,#{pm_textColor,jdbcType=VARCHAR}
+		                    ,#{pm_share,jdbcType=VARCHAR}
+		                    ,#{pm_dept,jdbcType=VARCHAR}
+		                    ,#{pm_place,jdbcType=VARCHAR}
+		                    ,#{pm_alarm,jdbcType=VARCHAR}
+		                    ,#{pm_alarmTime,jdbcType=VARCHAR}
+		                    ,#{pm_message,jdbcType=VARCHAR}
+		                    ,#{pm_recipient,jdbcType=VARCHAR}
+		                    ,SYSDATE
+		                    ,SYSDATE
+		                    ,'Y')	
+	</insert>
+	
+	<!-- ======= 일정수정 ============================== -->
+	<update id="planUpdate"
+			parameterType="plan">		
+		UPDATE   UNIFORM_PLANNER P			
+		SET      P.PM_TITLE = #{pm_title,jdbcType=VARCHAR}
+		        ,P.PM_START = #{pm_start,jdbcType=VARCHAR}
+		        ,P.PM_END = #{pm_end,jdbcType=VARCHAR}
+		        ,P.PM_CONTEXT = #{pm_context,jdbcType=VARCHAR}
+		        ,P.PM_ALLDAY = #{pm_allDay,jdbcType=VARCHAR}
+		        ,P.PM_BACKGROUNDCOLOR = #{pm_backgroundColor,jdbcType=VARCHAR}
+		        ,P.PM_SHARE = #{pm_share,jdbcType=VARCHAR}
+		        ,P.PM_DEPT = #{pm_dept,jdbcType=VARCHAR}
+		        ,P.PM_PLACE = #{pm_place,jdbcType=VARCHAR}
+		        ,P.PM_ALARM = #{pm_alarm,jdbcType=VARCHAR}
+		        ,P.PM_ALARMTIME = #{pm_alarmTime,jdbcType=VARCHAR}
+		        ,P.PM_MESSAGE = #{pm_message,jdbcType=VARCHAR}
+		        ,P.PM_RECIPIENT = #{pm_recipient,jdbcType=VARCHAR}
+		        ,P.PM_UPDATEDATE = SYSDATE
+		WHERE  P.PM_NO = #{pm_no,jdbcType=VARCHAR}
+		AND    P.PM_DELETEYN = 'Y'
+	</update>
+	
+	<!-- ======= 일정삭제 ============================== -->
+	<update id="planDelete"
+			parameterType="plan">
+		UPDATE   UNIFORM_PLANNER P			
+		SET      P.PM_DELETEYN = 'N'
+		        ,P.PM_UPDATEDATE = SYSDATE
+		WHERE  P.PM_NO = #{pm_no,jdbcType=VARCHAR}
+		AND    P.PM_DELETEYN = 'Y'	
+	</update>	
+	
+	<!-- ======= 회원검색 ============================== -->
+	<select id="planSearchMember"
+			parameterType="plan"
+			resultType="plan">
+		SELECT
+		       I.I_NO     I_NO
+		      ,I.I_NAMEKR I_NAMEKR
+		      ,(SELECT C.CODE_DETAIL FROM UNIFORM_CODE C WHERE C.CODE = E.EM_DEPT) EM_DEPT
+		FROM  UNIFORM_INFO I,UNIFORM_EMP E
+		WHERE I.I_DELETEYN = 'Y'
+		AND   I.I_NO       = E.I_NO
+		AND   I.I_NAMEKR LIKE '%' || #{i_nameKr} || '%'		
+	</select>
+	
+	<select id="getAlarm" parameterType="plan" resultType="plan">
+	
+		SELECT
+			  P.PM_ALARMTIME PM_ALARMTIME
+		FROM UNIFORM_PLANNER P
+		WHERE P.PM_DELETEYN = 'Y'
+		AND   P.I_NO = #{i_no}
+	
+	</select>
+	
+</mapper>						

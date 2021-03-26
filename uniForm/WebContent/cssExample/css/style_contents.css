@@ -1,0 +1,866 @@
+@charset "utf-8";
+/* body.reponsible reset */
+body.mobile .floatL.w5per,
+body.mobile .floatL.w10per,
+body.mobile .floatL.w15per,
+body.mobile .floatL.w20per,
+body.mobile .floatL.w25per,
+body.mobile .floatL.w30per,
+body.mobile .floatL.w35per,
+body.mobile .floatL.w40per,
+body.mobile .floatL.w45per,
+body.mobile .floatL.w50per,
+body.mobile .floatL.w55per,
+body.mobile .floatL.w60per,
+body.mobile .floatL.w65per,
+body.mobile .floatL.w70per,
+body.mobile .floatL.w75per,
+body.mobile .floatL.w80per,
+body.mobile .floatL.w85per,
+body.mobile .floatL.w90per,
+body.mobile .floatL.w95per,
+body.mobile .floatL.w100per { width: 100%; }
+body.mobile .floatR.w5per,
+body.mobile .floatR.w10per,
+body.mobile .floatR.w15per,
+body.mobile .floatR.w20per,
+body.mobile .floatR.w25per,
+body.mobile .floatR.w30per,
+body.mobile .floatR.w35per,
+body.mobile .floatR.w40per,
+body.mobile .floatR.w45per,
+body.mobile .floatR.w50per,
+body.mobile .floatR.w55per,
+body.mobile .floatR.w60per,
+body.mobile .floatR.w65per,
+body.mobile .floatR.w70per,
+body.mobile .floatR.w75per,
+body.mobile .floatR.w80per,
+body.mobile .floatR.w85per,
+body.mobile .floatR.w90per,
+body.mobile .floatR.w95per,
+body.mobile .floatR.w100per { width: 100%; }
+
+body.mobile img { max-width: 100%;}
+body.tablet .rw100 {width: 100% !important; float: none !important;}
+body.tablet .rw_img {float: none !important;}
+body.tablet .rw_img img {margin: 0 auto; display: block;}
+
+/* content common */
+body.tablet .h_img img {
+	max-width: 100%;
+}
+body.mobile .h_img img {
+	display: none;
+}
+.h_img img {
+	margin: 0 auto;
+	display: block;
+}
+.h_img .hc {
+	overflow: hidden;
+	position: absolute;
+	top: -9999px;
+	left: -9999px;
+	height: 1px;
+}
+body.mobile .hc {
+	position: static;
+	height: auto;
+	margin-bottom: 30px;
+}
+
+/******** 민원ㆍ국민참여 ********/
+/* 장관과의 대화 */
+.talk {
+	background: url('../images/contents/talk_bg.png') right bottom no-repeat;
+	min-height: 340px;
+	line-height: 1.7;
+}
+.talk .header {
+	color: #505050 !important;
+	font-size: 2em;
+	line-height: 1.4;
+}
+.talk .header span{ 
+	color: #0d6c9a;
+}
+.talk p.strong {
+	color: #333 !important;
+	font-size: 1.14em;
+	font-weight: bold;
+}
+
+
+/******** 국방부 소개 ********/
+/* 인사말 */
+.greeting {
+	border: 1px solid #dedede;
+	border-bottom: 0;
+	background: url('/mbshome/mbs/mnd/images/contents/greeting_bg.png') right top no-repeat;
+	background-size: 100%;
+}
+.greeting_bg {
+	position: relative;
+	padding: 50px;
+	background: url('/mbshome/mbs/mnd/images/contents/greeting_bg03.png') right bottom no-repeat;
+	min-height: 527px;
+}
+.greeting .title {
+	color: #001340;
+	font-size: 1.85em;
+	letter-spacing: -2px;
+}
+.greeting .title span {
+	display: block;
+	color: #105793;
+	font-weight: bold;
+	font-size: 1.15em;
+}
+body.tablet .greeting .content span.w_per{
+	width: 70%;
+	display: block;
+}
+.greeting .content {
+	line-height: 1.8;
+	margin-bottom: 10px;
+}
+.greetUl li {
+	background: url('/mbshome/mbs/mnd/images/contents/bul_greeting.gif') left 12px no-repeat;
+	padding-left: 15px;
+	margin-bottom: 10px;
+}
+.greetUl span {
+	color: #2268b7;
+	font-weight: bold;
+	margin-right: 10px;
+}
+.greeting .name {
+	color: #fff;
+	position: absolute;
+	right: 30px;
+	bottom: 55px;
+}
+.greeting_bg .name img {
+	vertical-align: middle;
+	margin-left: 10px;
+}
+/* 국방 비전 슬로건 */
+.slogan_area {
+	width: 100%;
+	min-height: 84px;
+	padding-left: 120px;
+	background: url('/mbshome/mbs/mnd/images/contents/img_06020102_02.png') left top no-repeat;
+}
+.slogan_down {
+	overflow: hidden;
+}
+.slogan_down .box_btn {
+	margin: 0 auto;
+	width: 117px;
+}
+.slogan_down li {
+	float: left;
+	width: 24.5%;
+	text-align: center;
+	border: 1px solid #e2e2e2;
+	border-left: 0;
+	padding: 10px 0;
+}
+.slogan_down li.last {
+	border-right: 0;
+}
+.slogan_down li p {
+	font-weight: bold;
+	color: #3c4552;
+	margin: 10px 0 15px;
+}
+/* 지난 슬로건 */
+.slogan_down.li03 li {
+	width: 32.5%;
+}
+/* 상징물 */
+.line {
+	border-top: 5px solid #e2e2e2;
+}
+.mark {
+	background-color: #edf4f9;
+	padding-top: 20px;
+}
+.mark li {
+	float: left;
+	text-align: center;
+	width: 25%;
+	margin: 10px 0;
+}
+.mark li.plus {
+	background: url('../images/common/bul_plus.gif') right center no-repeat;
+}
+.mark li p {
+	color: #232323 !important;
+	font-weight: bold;
+	font-size: 0.95em;
+	margin-top: 10px;
+}
+.mark li p.fS {
+	color: #656565 !important;
+	font-weight: normal;
+	font-size: 0.85em;
+}
+.logo {
+	background: url('../images/common/bg_squared.gif') left top repeat;
+	position: relative;
+	height: auto;
+	min-height: 211px;
+	padding: 30px 0 30px 80px; 
+}
+.logo .signature {
+	margin-bottom: 30px;
+}
+.logo h5 {
+	color: #231f20;
+	font-size: 15px;
+	letter-spacing: 0;
+	width: 150px;
+	height: 55px;
+	padding-top: 30px;
+}
+.logo img {
+	float: left;
+	max-width: 100%;
+}
+/* 장관약력 */
+.minister {
+	background: url('../images/contents/img_06030100.jpg') right top no-repeat;
+	min-height: 215px;
+}
+.minister > div {
+	padding: 45px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 1.4em;
+	letter-spacing: 0;
+}
+.minister > div > span {
+	font-size: 1.2em;
+	margin-left: 5px;
+}
+.minister > div > p {
+	color: #fff !important;
+	font-size: 14px;
+	font-weight: normal;
+	margin-top: 5px;
+}
+/* 차관약력 */
+.minister.vice {
+	background: url('../images/contents/img_06040100.gif') right top no-repeat;
+}
+/* 국방부 소개 > 연혁  */
+.slideTab {
+	overflow: hidden;
+	position: relative;
+}
+.slideTab a.btnP {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.slideTab a.btnN {
+	position: absolute;
+	top: 0;
+	right: 3px;
+}
+.slideTabIn {
+	position: relative;
+	overflow: hidden;
+	left: 40px;
+	width: 91%;
+	height: 40px;
+	background: #1b3f70;
+}
+.slideTabIn ul {
+	position: absolute;
+	background-color: #1b3f70;
+}
+.slideTabIn ul li {
+	float: left;
+	width: 83px;
+	text-align: center;
+	padding: 10px 0;
+}
+.slideTabIn ul li a {
+	color: #adc7ea;
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+}
+.slideTabIn ul li a.yOn,
+.slideTabIn ul li a:hover,
+.slideTabIn ul li a:focus {
+	color: #fff;
+	text-decoration: underline;
+}
+#box_history {
+	overflow: hidden;
+	margin: 25px 0 100px;
+}
+#sideTle {
+	width: 29%;
+	float: left;
+	border-top: 2px solid #1a4779;
+	border-bottom: 2px solid #1a4779;
+}
+#sideTle h4 {
+	color: #1a4782;
+	font-weight: bold;
+	font-size: 2.4em;
+/* 	font-size: 2.8em; */
+	padding: 0 20px;
+}
+.bdWrap {
+	width: 70%;
+	float: right;
+	border-top: 2px solid #585858;
+	border-bottom: 2px solid #585858;
+}
+.bdWrap .view_lst li {
+	border-top: 1px dashed #aaa;
+	padding: 15px 0;
+	overflow: hidden;
+}
+.bdWrap .view_lst li.first {
+	border-top: 0;
+}
+.bdWrap .view_lst li strong {
+	color: #666;
+	font-weight: normal;
+	float: left;
+	width: 20%;
+	text-align: center;
+}
+.bdWrap .view_lst li p {
+	float: left;
+	width: 80%;
+}
+
+/* 조직도 */
+.chart_org {
+	overflow: hidden;
+	position: relative;
+	background: url('../images/contents/bg_org_desktop.png') center 110px no-repeat;
+}
+.chart_org .chart01 {
+	position: relative;
+	overflow: hidden;
+}
+.chart_org h5 a,
+.chart_org h6 a {
+	color: #fff;
+}
+.chart_org h5 {
+	width: 112px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.45em;
+	background: url('../images/contents/bg_org_dep01.png') left top no-repeat;
+	padding: 41px 0;
+	margin: 0 auto 11px;
+}
+.chart_org h5.h5_02 {
+	background-position: left bottom;
+}
+.chart_org h6 {
+	width: 100px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1em;
+	background: #57758c;
+	padding: 10px 20px;
+}
+.chart_org .box_h6 ul {
+	border: 1px solid #57758c;
+	width: 98px;
+	padding: 10px 20px;
+}
+.chart_org .box_h7 {
+	margin-top: 20px;
+}
+.chart_org .box_h7 h6 {
+	width: 165px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.05em;
+	background: #eaeaea;
+	padding: 10px 20px;
+}
+.chart_org .box_h7 h6 a {
+	color: #555;
+}
+.chart_org .box_h7 ul {
+	border: 1px solid #ececec;
+	width: 163px;
+	padding: 10px 20px;
+	background: #fff;
+}
+.chart_org ul li a {
+	font-size: 0.85em;
+}
+.chart_org .c01_left {
+	float: left;
+	height: 200px;
+	padding-top: 15px;
+}
+.chart_org .box_h6 {
+	float: left;
+	margin: 0 20px;
+	background-color: #fff;
+}
+.chart_org .c01_right{
+	float: right;
+	height: 350px;
+/* 	background: url('../images/contents/bg_c01_right.png') -30px top no-repeat; */
+	padding-top: 15px;
+}
+.chart_org .c02_right {
+	float: right;
+	height: 41px;
+	margin-right: 245px;
+	padding-top: 15px;
+}
+.chart_org .chart02 {
+	position: absolute;
+	top: 277px;
+	width: 100%;
+	overflow: hidden;
+}
+.chart_org .chart02 h6 {
+	width: 100px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1em;
+	background: #76b3e3;
+	padding: 10px 20px;
+}
+.chart_org .chart02 .box_h6 ul {
+	border: 1px solid #76b3e3;
+	width: 98px;
+	padding: 10px 20px;
+}
+.chart_org .chart03 {
+	position: relative;
+	margin: 0 0 40px;
+	overflow: hidden;
+	top: 123px;
+}
+.chart_org .chart03 .box_h6 {
+	width: 20%;
+	background: url('../images/contents/bg_c03.png') center top no-repeat;
+	padding-top: 20px;
+}
+.chart_org .chart03 .box_h6.c03_04 {
+	background: url('../images/contents/bg_c03_04.png') center top no-repeat;
+	min-height: 950px;
+}
+.chart_org .chart03 h6 {
+	width: 120px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.05em;
+	background: #40a7b0;
+	padding: 10px 20px;
+	margin: 0 auto;
+}
+.chart_org .chart03 .box_h7 {
+	margin: 20px auto 0;
+}
+.chart_org .chart03 .box_h7 h6 {
+	background: #eaeaea;
+	font-size: 1em;
+}
+.chart_org .chart03 .box_h6 ul {
+	border: 1px solid #eaeaea;
+	width: 118px;
+	padding: 10px 20px;
+	margin: 0 auto;
+	background: #fff;
+}
+.chart_org .box_h6.c01_03 {
+	margin-top: 35px;
+	right: 240px;
+	position: absolute;
+}
+.chart_org .box_h6.c01_04 {
+	position: absolute;
+	top: 123px;
+	right: 0;
+	padding-top: 15px;
+	background: url('../images/contents/bg_c01_right.png') -230px top no-repeat;
+	z-index: 10;
+}
+.chart_org .box_h6.c01_04 h6 {width: 165px;}
+.chart_org .box_h6.c02_02 {left: 25%;}
+.chart_org .box_h6.c02_03 {top: 180px; right: 30%;}
+
+/* 찾아오시는 길 */
+#map {
+	max-width: 915px;
+	height: 500px;
+}
+.map_list_wrap {
+	position: absolute;
+	z-index: 100;
+}
+.map_list_wrap .map_list_btn {
+	width: 190px;
+	height: 40px;
+	color: #fff;
+	font-size: 1.0em;
+	text-align: left;
+	background: #21323e url("../images/common/map_list_btn.png") 90% center no-repeat;
+	padding-left: 20px;
+}
+.map_list_wrap .map_list_btn.on {
+	background: #21323e url("../images/common/map_list_btn_on.png") 90% center no-repeat;
+}
+.map_list_wrap .map_list {
+	display: none;
+	width: 170px;
+	background: #424a51;
+	padding: 15px 0 15px 20px;
+}
+.map_list_wrap .map_list li {
+	line-height: 1.9;
+}
+.map_list_wrap .map_list a:hover,
+.map_list_wrap .map_list a:focus {
+	color: #fff;
+	text-decoration: none;
+}
+.map_list_wrap .map_list a {
+	color: #bbb;
+}
+.map .img_map{
+	max-width: 915px;
+}
+.map .img_map img {
+	width: 100%;
+	height: 100%;
+}
+.map_info {
+	background: #edf2f4;
+	overflow: hidden;
+}
+.map_info li {
+	float: left;
+	padding: 10px 18px 5px;
+}
+.map_info li p { 
+	display: inline-block;
+	color: #333 !important;
+}
+.map_info li span {
+	width: 40px;
+	height: 40px;
+	display: inline-block;
+	text-indent: -5000px;
+	vertical-align: middle;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	background: url('/mbshome/mbs/mnd/images/common/map_info.gif') left top no-repeat;
+}
+.map_info li span.phone {background-position: -40px top;}
+.map_info li span.fax {background-position: -80px top;}
+.customoverlay {
+	position: relative;
+	bottom: 85px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+}
+.customoverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+.customoverlay a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+}
+.customoverlay .title {
+	display: block;
+	text-align: center;
+	background: #fff;
+	/* margin-right: 35px; */
+	padding: 10px 15px;
+	font-size: 14px;
+	font-weight: bold;
+}
+.table_wrap.map td span {
+	width: 40px;
+	height: 27px;
+	display: inline-block;
+	text-indent: -5000px;
+	vertical-align: middle;
+	background: url('/mbshome/mbs/mnd/images/common/map_traffic.gif') left top no-repeat;
+}
+.table_wrap.map td span.line6 {background-position: -40px top;}
+.table_wrap.map td span.bus_blue {background-position: left bottom; width: 27px; height: 30px; }
+.table_wrap.map td span.bus_green {background-position: -27px bottom; width: 27px; height: 30px; }
+.table_wrap.map td span.bus_grey {background-position: -54px bottom; width: 27px; height: 30px; }
+
+/******** 홈페이지 안내 ********/
+/* 이용안내 */
+.inner_link {
+	padding-top: 270px;
+	margin-top: -270px;
+}
+.info_content {
+	margin-top: 40px;
+}
+.info_bg {text-indent: -5000px}
+.info_bg.a01 {height: 377px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_01.gif') center top no-repeat;}
+.info_bg.a02 {height: 325px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_02.gif') center top no-repeat;}
+.info_bg.a05 {height: 340px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_03.gif') center top no-repeat;}
+.info_bg.a08 {height: 359px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_04.gif') center top no-repeat; background-size: 100%;}
+.info_bg.a09 {height: 218px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_05.gif') center top no-repeat;}
+.info_bg.a10 {height: 340px; background: url('/mbshome/mbs/mnd/images/contents/img_07010000_06.gif') center top no-repeat;}
+body.mobile .info_content {
+	margin-top: 0px !important;
+}
+body.mobile .info_bg {height: 0;}
+
+/* 전체 배너 보기 */
+.banner_all {
+	overflow: hidden;
+	margin-bottom: 60px;
+}
+.banner_all li {
+	float: left;
+	border: 1px solid #ddd;
+	margin: 0 10px 10px 0;
+}
+.banner_all li img {
+	vertical-align: middle;
+}
+.banner_all .bannerEmptyArea {
+	border: 0;
+}
+
+/***********************************
+ 반응형
+***********************************/
+/******** 민원ㆍ국민참여 ********/
+/* 장관과의 대화 */
+body.tablet .talk {
+	min-height: 600px;
+}
+body.tablet .talk .floatL.w60per {
+	width: 90%;
+}
+body.mobile .talk {
+	min-height: 800px;
+}
+/******** 국방부 소개 ********/
+/* 인사말 */
+body.tablet .greeting_bg {
+	min-height: 580px;
+} 
+body.tablet .greeting .content span.w_per{
+	width: 50%;
+	display: block;
+}
+body.mobile .greeting_bg {
+	padding: 30px 20px 0;
+	min-height: 920px;
+}
+body.mobile .greeting .content span.w_per{
+	width: 100%;
+}
+/* 임무 비전 */
+body.tablet .slogan_down li {
+	width: 49%;
+}
+body.tablet .slogan_down li:nth-child(2) {
+	border-right: 0;
+}
+body.tablet .slogan_down li:nth-child(3),
+body.tablet .slogan_down li:nth-child(4) {
+	border-top: 0;
+}
+body.mobile .slogan_area {
+	background: none;
+	padding-left: 0;
+}
+/* 지난 슬로건 */
+body.tablet .slogan_down.li03 li {
+	width: 32.5%;
+}
+body.tablet .slogan_down.li03 li:nth-child(2) {
+	border-right: 1px solid #e2e2e2;
+}
+body.tablet .slogan_down.li03 li:nth-child(3) {
+	border-top: 1px solid #e2e2e2;
+}
+body.mobile .slogan_down.li03 li {
+	width: 100%;
+	border-bottom: 0;
+}
+body.mobile .slogan_down.li03 li.last {
+	border-bottom: 1px solid #e2e2e2;
+}
+/* 상징물 */
+body.tablet .mark li {
+	width: 45%;
+}
+body.mobile .mark li {
+	width: 49%;
+}
+body.tablet .logo img {
+	max-width: 100%;
+}
+body.tablet .logo {
+	padding: 0 10px 26px;
+}
+/* 연혁 */
+body.mobile #sideTle {
+	width: 100%;
+	height: auto !important;
+	margin-bottom: 10px;
+}
+body.mobile .bdWrap {
+	width: 100%;
+}
+body.mobile .bdWrap .view_lst li strong,
+body.mobile .bdWrap .view_lst li p{
+	float: none;
+	width: 100%;
+}
+/* 장관약력 */
+body.mobile .minister > div {
+	padding: 220px 0 0 20px;
+	color: #333;
+}
+body.mobile .minister > div > span{
+	display: block;
+	margin-left: 0;
+}
+body.mobile .minister > div > p {
+	color: #333 !important;
+}
+/* 조직도 */
+body.tablet .c01_left {
+	float: none;
+	position: relative;
+	max-width: 360px;
+	height: 116px;
+	margin: 0 auto 40px;
+}
+body.tablet .c01_right {
+	float: none;
+	position: relative;
+	margin: 0 auto;
+	max-width: 450px;
+	height: 315px;
+	background: none;
+	padding: 0;
+}
+body.tablet .box_h6.c01_04 {
+	margin: 0;
+	top: 0;
+	padding-top: 0;
+	background: url('../images/contents/bg_c03.png') center top no-repeat;
+}
+body.tablet .box_h6.c01_03 {
+	margin: 0;
+	margin-top: 0;
+	margin-left: 40px;
+}
+body.tablet .chart_org { 
+	background: url('../images/contents/bg_org_tablet.png') center 0 no-repeat;
+}
+body.tablet .chart_org .chart02 {
+	top: 650px;
+}
+body.tablet .c02_right {
+	float: none;
+	position: relative;
+	margin: 0 auto;
+	max-width: 180px;
+}
+body.tablet .chart_org .chart03 {
+	margin-top: 305px;
+}
+body.tablet .chart_org .chart03 .box_h6 {
+	width: 50%;
+	margin: 0 auto 20px;
+	padding-top: 0;
+}
+body.mobile .chart_org .chart02 {
+	position: static;
+}
+body.mobile .chart_org .chart03 {
+	margin-top: 60px;
+	position: static;
+}
+body.mobile .chart_org .box_h6 {
+	float: none;
+	margin: 0;
+	margin-top: 20px;
+	width: 100%;
+	position: static;
+}
+body.mobile .chart_org .box_h6 h6 {
+	width: 100%;
+	padding: 10px 0;
+}
+body.mobile .c01_left{
+	height: auto;
+}
+body.mobile .chart_org .box_h6 ul{
+	width: 89%;
+	padding: 10px 5%;
+}
+body.mobile .c01_right{
+	height: auto;
+}
+body.mobile .c02_right {
+	max-width: 100%;
+	padding: 0;
+}
+body.mobile .chart_org .chart03 .box_h6{
+	width: 100%;
+	margin-bottom: 30px;
+	min-height: auto;
+}
+body.mobile .chart_org {background: none;}
+body.mobile .chart_org h5 {padding: 42px 0 43px;}
+body.mobile .table_wrap.org table tbody th {padding-left: 10px;}
+
+/***********************************
+ iframe
+***********************************/
+.box_iframe .page_ready {
+	display: none;
+	font-size: 12px;
+}
+.frameDiv {display: none;}
+body.tablet .box_iframe .page_ready {display: block;}
+body.tablet .box_iframe iframe {display: none;}
+
+/***********
+적극행정
+***********/
+.notice-box3 {
+	background: #fbfbfb;
+	border: 1px solid #d1d1d1;
+	padding: 30px;
+}
+.w100per1{
+width: 100%;
+}

@@ -1,0 +1,178 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="com.uniform.em.common.vo.EmCommonVO" %>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Uniform</title>
+<%
+	HttpSession hs = request.getSession(true);
+	String i_no = (String)hs.getAttribute("i_no");
+	boolean sessionBool = false;
+	sessionBool = i_no==null;
+	if(sessionBool){
+%>
+		<script type="text/javascript">
+			alert("세션이 만료되었습니다. 다시 로그인 해주세요");
+			location.href="/index.jsp";
+		</script>
+<%
+	}else{
+%>		
+		<!-- 
+		<script type="text/javascript"
+				src="/include/js/jquery-1.11.0.min.js"></script>
+				 -->
+		<script type="text/javascript"
+				src="https://code.jquery.com/jquery-1.11.0.min.js"></script>		 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#test").hide();
+<%
+	Object obj = request.getAttribute("mainVO");
+	EmCommonVO ecvo = (EmCommonVO)obj;
+	String i_nameKr = ecvo.getI_nameKr();
+	int mSize = (int)request.getAttribute("mSize");
+	boolean masterBool = i_no.indexOf("M") > -1;
+%>				
+				if(<%=masterBool%>){
+					$("#myA").hide();
+				}// 마스터 계정일 경우 마이페이지 버튼을 숨기는 if문 종료
+			
+				$("#em_btn").on("click",function(){
+					location.href="/em/goEmMain.uni";
+				});
+				
+				$("#si_btn").on("click",function(){
+					location.href="/si/goSiMain.uni";
+				});
+				
+				$("#ea_btn").on("click",function(){
+					location.href="/ea/goEaMain.uni";
+				});
+				
+				$("#pm_btn").on("click",function(){
+					location.href="/main/pmGoPlanMain.uni"
+				});
+				
+				$("#bm_btn").on("click",function(){
+					location.href="/board/boardList.uni";
+				});
+				
+				$("#nm_btn").on("click",function(){
+					location.href="/nm/goNoticeList.uni";
+				});
+			});
+			
+			function test(){
+				$("#test").show();
+			}
+			
+			function test2(){
+				$("#test").hide();
+			}
+		</script>
+		
+		<script type="text/javascript"
+				src="/include/js/alarm.js"></script>
+		<script type="text/javascript">
+			var i_no = "<%=i_no%>";
+	        
+	    </script>			
+	</head>
+	<body>
+		<a href="/main/goMain.uni">
+			<img src="/common/img/Uniform.PNG" border="0">
+		</a><br>
+		<table align="left">
+			<tr>
+				<td><%=i_nameKr %>님<br>
+					쪽지 <a href="/mm/goMessageMain.uni"><%=mSize %></a>개		 
+					<a href="/main/goMyInfo.uni" id="myA">마이페이지</a> 				
+					<a href="/sm/logout.uni">Logout</a>
+				</td>
+			</tr>
+		</table>
+		<table align="center" onmouseover="test()" onmouseout="test2()">
+			<tr>
+				<td>
+					<input type="button" value="학교정보">&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					<input type="button" value="전자결재" id="ea_btn">&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					<input type="button" value="일정관리" id="pm_btn">&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					<input type="button" value="학생관리" id="si_btn">&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					<input type="button" value="게시판" id="bm_btn">&nbsp;&nbsp;&nbsp;
+				</td>
+				<td>
+					<input type="button" value="공지사항" id="nm_btn">&nbsp;&nbsp;&nbsp;
+				</td>
+<%
+		if(i_no.indexOf("M")>-1){
+%>				
+				<td>
+					<input type="button" value="인사관리" id="em_btn">
+				</td>
+<%
+		}
+%>				
+			</tr>
+			<tr id="test">
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+				<td>
+					<ol>
+						<li>항목1</li>
+						<li>항목2</li>
+						<li>항목3</li>
+					</ol>
+				</td>
+			</tr>
+		</table>
+		<input type="hidden" id="size" value="<%=mSize%>">
+		<input type="hidden" id="i_no" value="<%=i_no%>">
+	</body>
+<%
+	}
+%>	
+</html>

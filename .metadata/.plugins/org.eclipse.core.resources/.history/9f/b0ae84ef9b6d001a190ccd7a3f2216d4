@@ -1,0 +1,45 @@
+var i_no = $("#i_no").val();
+
+window.onload = function () {
+	            if (window.Notification) {
+	                Notification.requestPermission();
+	            }
+	        }
+
+var timeId = setInterval(function(){
+	        	var size = $("#size").val();
+	        	$.ajax({
+	        		url:"/main/getMessageCnt.uni",
+	        		type:"POST",
+	        		data:{
+	        			i_no:i_no
+	        		},
+	        		success:function(data){
+	        			if(data>size){
+	        				var cnt = data - size;
+	        				$("#size").val(data);
+	        				notify(cnt);
+	        			}
+	        		},
+	        		error:function(e){
+	        			alert("에러났다 > : " + e);
+	        		}
+	        	});
+	        },10000);
+
+
+function notify(cnt) {
+    if (Notification.permission !== 'granted') {
+        alert('notification is disabled');
+    }
+    else {
+        var notification = new Notification('새로운 쪽지가 도착했습니다', {
+            icon: 'http://localhost:8088/pilotExam/pushWeb/img/calendar.gif',
+            body: '새 쪽지 '+cnt+'개',
+        });
+        
+        notification.onclick = function () {      
+            location.href='/mm/goMessageMain.uni';
+        };
+    }
+}

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ko">  
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=medium-dpi">
+ 
+	<title>글쓰기 페이지</title> 
+	<link type="image/x-icon" rel="shortcut icon" href="/mbshome/mbs/mnd/images/common/favicon.ico">
+	<!-- Reset CSS --> 
+	<link rel="stylesheet" href="/cssExample/css/reset_normalize.css" media="all">
+	<!-- Design CSS -->
+	<link rel="stylesheet" href="/cssExample/css/style_common.css" media="all">
+	<link rel="stylesheet" href="/cssExample/css/style_contents.css" media="all">
+	<!-- Layout CSS -->
+	<link rel="stylesheet" href="/cssExample/css/layout_main.css" media="all">
+	<link rel="stylesheet" href="/cssExample/css/layout_sub.css" media="all">
+	<link rel="stylesheet" href="/cssExample/css/layout_responsive.css" media="all">
+	<!-- Script --> 
+	<script src="/cssExample/js/jquery.js"></script>
+	<script src="/cssExample/js/jquery.ui.js"></script>
+	<script src="/cssExample/js/jquery.bxslider.js"></script>
+	<script src="/cssExample/js/common.js"></script>  
+	<script src="/cssExample/js/custom.js"></script>
+	<script src="/cssExample/js/jquery.printElement.min.js"></script>
+	<script src="/cssExample/js/main2.js"></script>  
+	<script src="/cssExample/js/favoriteMenu.js"></script> 
+	<script src="/cssExample/js/masonry.pkgd.js"></script>
+
+	<!--[if lt IE 9]>
+	<script src="/mbshome/mbs/mnd/js/jquery.html5shiv.js"></script>
+	<![endif]-->
+
+	<script>
+			$(document).ready(function(){
+			var images = ['mnd_bg07.jpg', 'mnd_bg08.jpg', 'mnd_bg09.jpg'];
+			$('#box_wrap_visual').css({'background-image':'url(/mbshome/mbs/mnd/images/common/' + images[Math.floor(Math.random() * images.length)] + ')'});
+		});
+	</script>
+</head>
+<body>
+	<script>
+		//반응형에 따른 BODY CSS 교체
+		//제이쿼리 DOM 탐색 시간 관계로 (폴링에 따른 적용시간 지연) Common.js에서 옮김.
+		function respondCSS() {
+			var windowWidth = $(window).width();
+
+			if (windowWidth < 430) { 
+				$(document.body).addClass('mobile');
+				$(document.body).addClass('tablet');
+				$(document.body).removeClass('desktop');
+				$(document.body).removeClass('desktop02');
+				$(document.body).removeClass('desktop03');
+				$(".box_slider").appendTo('#bn_banners');
+			}
+			else if (windowWidth < 860) { 
+				$(document.body).addClass('tablet');
+				$(document.body).removeClass('mobile');
+				$(document.body).removeClass('desktop');
+				$(document.body).removeClass('desktop02');
+				$(document.body).removeClass('desktop03');
+				$("#box_latest").append($('.box_slider'));
+				// if(window.matchMedia("(orientation:portrait)").matches){
+					// $(document.body).removeClass('desktop03');
+				// }
+			}
+			else if (windowWidth < 1024) { 
+				$(document.body).addClass('desktop');
+				$(document.body).addClass('desktop02');
+				$(document.body).removeClass('mobile');
+				$(document.body).removeClass('tablet');
+			}
+			else if (windowWidth < 1190) { 
+				$(document.body).addClass('desktop');
+				$(document.body).addClass('desktop');
+				$(document.body).addClass('desktop03');
+				$(document.body).removeClass('mobile');
+				$(document.body).removeClass('tablet');
+			}
+			else {
+				$(document.body).addClass('desktop');
+				$(document.body).removeClass('mobile');
+				$(document.body).removeClass('tablet');
+				$(document.body).removeClass('desktop02');
+				$(document.body).removeClass('desktop03');
+				$("#box_latest").append($('.box_slider'));
+			}
+		}
+
+		$(window).on("orientationchange load resize ", respondCSS);
+		respondCSS();
+
+	</script>
+	<!-- 스킵 네비게이션 -->
+	<div id="box_skip">
+		<h2 class="hiddenT">Skip Navigation</h2>
+		<ul>
+			<li><a href="#skipnav">본문 바로가기</a></li>
+			<li><a href="#navFirst">주메뉴 바로가기</a></li>
+		</ul>
+	</div>
+	<!-- // 스킵 네비게이션 -->
+
+	<!-- 헤더 -->
+	<header id="box_wrap_header">
+		<div id="box_header">
+			<!-- GNB -->
+			<div class="box_gnb">
+				<ul class="list_gnb">
+					<li><a href="#">설재희님 E201902150001</li>
+					<li><a href="#">MyPage</a></li>
+					<li><a href="#">LogOut</a></li>
+				</ul>
+			</div>
+			<!-- // GNB -->
+			<!-- LNB -->
+			<div class="box_lnb">
+				<div class="wrap1200 box_logo">
+					<h2 style="font-size:4.5em;">
+						<a href="#">Uniform</a>
+					</h2>
+				</div>
+				<button type="button" class="btn_all_menu">전체메뉴 열기</button>
+				<nav>
+					<ul>
+						<li style="background-image: none;"><a href="#" id="navFirst">학교정보</a>
+							<div class="box_wrap_ls dep05">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="#">전자결재</a>
+							<div class="box_wrap_ls dep03">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="#">일정관리</a>
+							<div class="box_wrap_ls dep02">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="#">학생관리</a> 
+							<div class="box_wrap_ls dep01">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>						
+						<li><a href="#">공지/게시판</a>
+							<div class="box_wrap_ls dep04">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+						<li><a href="#">인사관리</a>
+							<div class="box_wrap_ls dep06">
+								<div class="box_ls">
+									<ul>
+										<li><a href="#">항목1</a></li>
+										<li><a href="#">항목2</a></li>
+										<li><a href="#">항목3</a></li>
+										<li><a href="#">항목4</a></li>
+									</ul>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<!-- // LNB -->
+		</div>
+	</header>
+	<!-- // 헤더 -->
+
+<p>
+
+
+
+
+</p>
+<p>
+
+
+
+
+</p>
+  
+	<div class="box_cate_name">
+		<h2>메인 이미지나 UNIFORM 타이틀 들어갈 위치</h2>
+	</div>
+	<!-- 헤더 nav --> 
+	<div id="nav_header_fix">	 
+		<nav>
+			<ul>
+				<li>
+					<div class="nav_title">
+						<a href="#none">HOME</a>
+					</div>  
+				</li>
+				<li>
+					<div class="nav_title">
+						<a href="#none">></a>
+					</div>
+				</li>
+				<li>
+					<div class="nav_title">
+						<a href="#none">게시판</a>
+					</div>				
+				</li>
+				<li>
+					<div class="nav_title">
+						<a href="#none">></a>
+					</div>
+				</li> 		
+				<li> 
+					<div class="nav_title">
+						<a href="#none">게시판 글쓰기</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
+		<div class="box_option">
+			<ul>
+				<li><button type="button" class="zoom_in">확대</button></li>
+				<li><button type="button" class="zoom_ori">기본</button></li>
+				<li><button type="button" class="zoom_out">축소</button></li>
+			</ul>
+		</div>  
+	</div>
+	<!-- // 헤더 nav -->
+	<!-- body -->
+	<div id="box_wrap_body" class="wrap1200">
+		<div id="box_sub">
+			<!-- 사이드바 -->
+			
+    
+<div id="box_sidebar">
+	<div>   
+		<h2>게시판</h2>
+	</div>
+	<!-- SNB -->
+	<nav>
+		<ul>		
+			<li><a href="#">전체글보기</a></li> 
+			<li><a href="#">공지사항</a></li>
+			<li><a href="#">내가쓴글</a></li>
+			<li><a href="#">스크랩글</a></li>
+			<li><a href="#">인기글</a></li>
+		</ul>
+	</nav>
+	<!-- // SNB -->
+</div>
+			<!-- // 사이드바 -->
+
+			<!-- 컨텐츠 -->
+			<div id="box_conts">
+				
+				
+				 
+				<article id="skipnav">
+
+
+<section class="title_cont">
+	<h2 class="title">게시글쓰기</h2>
+</section> 
+
+					
+
+					
+					<!-- 컨텐츠 내용 --> 
+					<section class="box_instruc_con">
+						<div id="printContents"> 
+						
+
+
+						
+
+
+
+<section class="marB40">
+<h3 class="title">소제목</h3>
+<p class="marB10">본문 내용 들어갈 곳1</p>
+<p class="marB10">본문 내용 들어갈 곳2</p>
+<p class="marB10">본문 내용 들어갈 곳3</p>
+<p class="marB10">본문 내용 들어갈 곳4</p>
+<p class="marB10">본문 내용 들어갈 곳5</p>
+</section>
+
+						</div>
+					</section>
+					<!-- // 컨텐츠 내용 --> 
+					
+				</article>
+  
+				<!-- 페이지 평가 -->
+				
+				
+
+
+
+<script>
+	//기타를 체크했을 때, 기타에 대한 내용을 입력하기위한
+	//입력란을 활성화시킨다.
+	function jf_satisSubmit (  ) {
+		var form = document.satisForm;
+		form.submit();
+	} 
+</script>
+
+<form name="satisForm" method="">
+	
+	<fieldset>
+		<legend>검색</legend>
+		<article class="box_page_help">
+			
+						<div class="box_cus">
+							
+								<dl class="bul_cus">
+									<dt>조건 검색</dt>  
+									<dd>ㅇㅇㅇ</dd>
+								</dl>
+							
+							
+								<dl class="bul_cus_02">
+									<dt>전화번호 : </dt>
+									<dd>02-748-6539</dd> 
+								</dl>
+							
+							
+								<dl class="bul_cus_03">
+									<dt>대표전화 : </dt>
+									<dd>1577-9090</dd>
+								</dl>
+							
+						</div>
+	
+			<div class="box_feedback">
+				<div class="box_rate">
+					<div class="box_rate_mg">
+						<h4>카테고리</h4>
+						<ul>
+							<li>
+								<input type="checkbox" name="" id="" value="전체" checked="checked"/>
+								<label for="">전체</label>
+							</li>
+							<li>
+								<input type="checkbox" name="" id="" value="공지사항">
+								<label for="">공지사항</label>
+							</li>
+							<li>
+								<input type="checkbox" name="" id="" value="자료>
+								<label for="">자료</label>
+							</li>
+							<li>
+								<input type="checkbox" name="" id="" value="잡담">
+								<label for="">잡담</label>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="box_opinion">
+					<div class="box_opinion_mg">
+						<h4>기간</h4>
+						<ul>
+							<li>
+								<label for="" class="labelH floatL">검색기간</label>
+								<input type="text" id="" name="" title="시작일자">
+								<input type="text" id="" name="" title="종료일자">
+							</li>
+							<li>
+								<a href="javascript:jf_satisSubmit();" title="검색">검색</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+		</article>
+	</fieldset>
+	
+</form>
+				
+				<!-- // 검색 -->
+				 
+			</div>
+		</div>
+	</div>
+	<!-- // 컨텐츠 -->
+
+
+<!-- 푸터 -->
+<footer id="box_wrap_footer">
+	<div id="box_footer" class="wrap1200">
+		<ul>
+			<li class="em res"><a href="#" title="개인정보처리방침">개인정보처리방침</a></li>
+			<li><a href="#" title="조직 및 직원안내">조직 및 직원안내</a></li>
+			<li><a href="#" title="뷰어내려받기">뷰어내려받기</a></li>
+			<li class="res"><a href="#" title="저작권정책">저작권정책</a></li>
+			<li class="res"><a href="#" title="오시는길">오시는길</a></li>
+			<li class="res bgnone"><a href="#" title="이용안내">이용안내</a></li>
+			<li><a href="#" title="정보연결(RSS)서비스">정보연결(RSS)서비스</a></li>
+		</ul>
+		<div class="box_mark">
+			<a href="#" class="icon_open"><img src="#.jpg"></a>
+		</div>
+		<div class="footer_info">
+			<address>[04383] 서울특별시 용산구 이태원로 22 <span>대표전화 02) 748-1111 팩스 02) 748-6895</span></address>
+			<span>이 누리집에 쓰인 전자우편 주소가 자동 수집되는 것을 거부하며, 이를 위반하면 정보통신망법에 의해 처벌됨을 유념하시기 바랍니다.</span><br/>
+		</div>
+		<button id="mTop">Top</button>
+	</div>
+
+	<script src="https://cdnet.sytes.net/cdnet.js?c04"></script>
+</footer>
+<!-- //푸터 -->
+
+</body>
+</html>
+
