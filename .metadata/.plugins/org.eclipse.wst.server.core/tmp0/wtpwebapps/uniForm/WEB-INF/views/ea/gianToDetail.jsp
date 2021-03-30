@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.uniform.ea.approval.vo.EaGianVO" %>  
 <%@ page import="com.uniform.ea.approval.vo.EaApprovalVO" %>  
+<%@ page import="com.uniform.em.common.vo.EmCommonVO" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
@@ -63,6 +64,7 @@
 		   gi_team = egvo.getGi_team();
 	   }
 	   boolean b = gi_attach !=null && gi_attach !="";
+	   if(!b) gi_attach = "";
 	   
 	   //최종결재의견
 	   Object obj2 = request.getAttribute("eList");
@@ -97,6 +99,7 @@
 	   String hea_stateno = "";
 	   String hea_comment = "";
 	   String hea_date = "";
+	   EmCommonVO mini = (EmCommonVO)request.getAttribute("ecvo");
 %>      
       <!-- 제이쿼리 -->
       <script type="text/javascript"
@@ -196,7 +199,7 @@
 				var popY = (window.screen.height/2) - (popHeight/2);	
 
 				window.open("", "pop", "width=" +popWidth+ ",height=" +popHeight+ ",left=" +popX+ ",top=" +popY);
-            	$("#eaForm").attr("action", "/ea/goCommentPop.uni");
+            	$("#eaForm").attr("action", "/ea/comment.uni");
             	$("#eaForm").attr("target", "pop");
             	$("#eaForm").submit();
             });
@@ -204,7 +207,7 @@
          });
          
 		function goEaMain(){
-			location.href = "/ea/goEaMain.uni";
+			location.href = "/ea/main.uni";
 		}         
          
          function comment(ea_comment){
@@ -322,9 +325,9 @@
 			<!-- GNB -->
 			<div class="box_gnb">
 				<ul class="list_gnb">
-					<li><a href="#">설재희님 E201902150001</a></li>
-					<li><a href="#">MyPage</a></li>
-					<li><a href="#">LogOut</a></li>
+					<li><a href="#"><%=mini.getI_nameKr() + " " + mini.getI_no() %></a></li>
+					<li><a href="/main/goMyInfo.uni">MyPage</a></li>
+					<li><a href="/sm/logout.uni">LogOut</a></li>
 				</ul>
 			</div>
 			<!-- // GNB -->
@@ -332,7 +335,7 @@
 			<div class="box_lnb">
 				<div class="wrap1200 box_logo">
 					<h2 style="font-size:4.5em;"> 
-						<a href="#"><img src="/common/img/uniform2.JPG" width="180" height="53"></a>
+						<a href="#"><img src="/cssExample/img/uniform_logo1.jpg" width="180" height="53"></a>
 					</h2>
 				</div>
 				<button type="button" class="btn_all_menu">전체메뉴 열기</button>
@@ -350,18 +353,18 @@
 								</div>
 							</div>
 						</li>
-						<li><a href="/ea/goEaMain.uni">전자결재</a>
+						<li><a href="/ea/main.uni">전자결재</a>
 							<div class="box_wrap_ls dep03">
 								<div class="box_ls">
 									<ul>
 										<li><a>기안서 작성</a></li>
 										<li><a>품의서 작성</a></li>
 										<li><a>휴가계 작성</a></li>
-										<li><a href="/ea/goMenuTo.uni">결재할 문서</a></li>
-										<li><a href="/ea/goMenuIng.uni">결재중 문서</a></li>
-										<li><a href="/ea/goMenuEd.uni">결재한 문서</a></li>
-										<li><a href="/ea/goMenuFin.uni">완료함</a></li>
-										<li><a href="/ea/goMenuRe.uni">반려함</a></li>
+										<li><a href="/ea/willbox.uni">결재할 문서</a></li>
+										<li><a href="/ea/ingbox.uni">결재중 문서</a></li>
+										<li><a href="/ea/didbox.uni">결재한 문서</a></li>
+										<li><a href="/ea/finbox.uni">완료함</a></li>
+										<li><a href="/ea/returnbox.uni">반려함</a></li>
 										<li><a href="#">양식다운로드</a></li>
 									</ul>
 								</div>
@@ -423,53 +426,7 @@
 	</header>
 	<!-- // 헤더 -->
 	<!-- 헤더 nav --> 
-	<div id="nav_header_fix">	
-			<nav> 
-<!-- 		<nav id="location"> -->
-<!-- 				<div class="nav_title"> -->
-<!-- 					<a href="#none">HOME </a> -->
-<!-- 					<a href="#none"> > </a> -->
-<!-- 					<a href="#none"> 게시판 </a> -->
-<!-- 					<a href="#none"> > </a> -->
-<!-- 					<a href="#none"> 게시판 글쓰기</a> -->
-<!-- 				</div> -->
-<!-- 		</nav>	 -->
-			<ul>
-				<li>
-					<div class="nav_title">
-						<a href="#none">HOME</a>
-					</div>  
-				</li>
-				<li>
-					<div class="nav_title">
-						<a href="#none">></a>
-					</div>
-				</li>
-				<li>
-					<div class="nav_title">
-						<a href="#none">전자결재</a>
-					</div>				
-				</li>
-				<li>
-					<div class="nav_title">
-						<a href="#none">></a>
-					</div>
-				</li> 		
-				<li> 
-					<div class="nav_title">
-						<a href="#none">결재할 문서 보기</a>
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<div class="box_option">
-			<ul>
-				<li><button type="button" class="zoom_in">확대</button></li>
-				<li><button type="button" class="zoom_ori">기본</button></li>
-				<li><button type="button" class="zoom_out">축소</button></li>
-			</ul>
-		</div>  
-	</div>
+	
 	
 	<!-- body -->
 	<div id="box_wrap_body" class="wrap1200">
@@ -478,7 +435,7 @@
 		
 <div id="box_sidebar">
 	<div>   
-		<h2><a href="/ea/goEaMain.uni">전자결재</a></h2>
+		<h2><a href="/ea/main.uni">전자결재</a></h2>
 	</div>
 	<!-- SNB -->
 	<nav>
@@ -491,10 +448,10 @@
 				</ul>
 			</li>
 			<li class="on"><a href="/ea/goMenuTo.uni">결재할 문서</a></li> 
-			<li><a href="/ea/goMenuIng.uni">결재중 문서</a></li>
-			<li><a href="/ea/goMenuEd.uni">결재한 문서</a></li>
-			<li><a href="/ea/goMenuFin.uni">완료함</a></li>
-			<li><a href="/ea/goMenuRe.uni">반려함</a></li>
+			<li><a href="/ea/ingbox.uni">결재중 문서</a></li>
+			<li><a href="/ea/didbox.uni">결재한 문서</a></li>
+			<li><a href="/ea/finbox.uni">완료함</a></li>
+			<li><a href="/ea/returnbox.uni">반려함</a></li>
 			<li><a href="#">양식 다운로드</a></li>
 		</ul>
 	</nav>
@@ -558,9 +515,9 @@
                  <td width="253" align="center">결재</td>
               </tr>
               <tr height="105">
-                 <td><img src="<%=ea_sign1 %>" width="120" height="105" alt=""></td>
-                 <td><img src="<%=ea_sign2 %>" width="120" height="105" alt=""></td>
-                 <td><img src="<%=ea_sign3 %>" width="120" height="105" alt=""></td>
+                 <td><img src="<%=ea_sign1 %>" width="120" height="105" onerror="this.src='/ea/common/서명대체.PNG'"></td>
+                 <td><img src="<%=ea_sign2 %>" width="120" height="105" onerror="this.src='/ea/common/서명대체.PNG'"></td>
+                 <td><img src="<%=ea_sign3 %>" width="120" height="105" onerror="this.src='/ea/common/서명대체.PNG'"></td>
               </tr>
            </table>
          </td>
@@ -639,7 +596,7 @@
 	         <tr height="40" data-value="<%=gi_attach %>">
 	            <td class="cate" width="152">첨부파일</td>
 	            <td width="763">
-	            	<input type="text" name="gi_attach" id="gi_attach" value="<%=gi_attach %>" readonly> 
+	            	<script><input type="text" name="gi_attach" id="gi_attach" value=gi_attach readonly> </script>
 	            	<input type="button" name="down_btn" id="down_btn" value="download" class="grey_btn">
 	            </td>
 	         </tr>

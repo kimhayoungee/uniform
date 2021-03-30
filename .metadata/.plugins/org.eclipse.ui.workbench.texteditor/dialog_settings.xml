@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item value="309" key="DIALOG_WIDTH"/>
-		<item value="240" key="DIALOG_Y_ORIGIN"/>
-		<item value="1390" key="DIALOG_X_ORIGIN"/>
-		<item value="444" key="DIALOG_HEIGHT"/>
-		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
-	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item value="true" key="wrap"/>
-		<item value="false" key="casesensitive"/>
 		<item value="false" key="isRegEx"/>
+		<item value="결재한" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
-		<item value="결재할" key="selection"/>
 		<list key="findhistory">
-			<item value="결재할"/>
-			<item value="signhistory"/>
-			<item value="결재"/>
-			<item value="signhi"/>
-			<item value="poomFormInsert"/>
-			<item value="form"/>
-			<item value="type"/>
-			<item value="tbody"/>
+			<item value="결재한"/>
+			<item value="gitoselect"/>
+			<item value="goEaMain"/>
+			<item value="gian/write"/>
+			<item value="gian/wrtie"/>
+			<item value="write"/>
+			<item value="mini"/>
+			<item value="box_sub"/>
 		</list>
 		<list key="replacehistory">
 		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="309" key="DIALOG_WIDTH"/>
+		<item value="1|맑은 고딕|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|맑은 고딕" key="DIALOG_FONT_NAME"/>
+		<item value="444" key="DIALOG_HEIGHT"/>
+		<item value="595" key="DIALOG_Y_ORIGIN"/>
+		<item value="1462" key="DIALOG_X_ORIGIN"/>
 	</section>
 </section>

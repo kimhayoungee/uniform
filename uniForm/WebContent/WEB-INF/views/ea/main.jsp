@@ -117,7 +117,7 @@
 					
 					var doctype = $(this).parents("tr").attr("data-type");
 					if(doctype.match("기안")){
-						$("#goDetailForm").attr("action", "/ea/giDetailSelect.uni");
+						$("#goDetailForm").attr("action", "/ea/gian.uni");
 					}
 					if(doctype.match("휴가")){
 						$("#goDetailForm").attr("action", "/ea/vaDetailSelect.uni");
@@ -134,7 +134,7 @@
 					
 					var doctype = $(this).parents("tr").attr("data-type");
 					if(doctype.match("기안")){
-						$("#goDetailForm").attr("action", "/ea/giToSelect.uni");
+						$("#goDetailForm").attr("action", "/ea/gian/detail.uni");
 					}
 					if(doctype.match("휴가")){
 						$("#goDetailForm").attr("action", "/ea/vaToSelect.uni");

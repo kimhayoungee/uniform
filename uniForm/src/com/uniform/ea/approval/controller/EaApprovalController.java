@@ -693,7 +693,7 @@ public class EaApprovalController {
 	}
 	
 	//기안서 결재할 문서 상세
-	@RequestMapping("/giToSelect")
+	@RequestMapping("/gian/detail")
 	public ModelAndView giToSelect(@ModelAttribute EaDocumentVO param
 			  					   ,HttpServletRequest req){
 		logger.info("컨트롤러 giToSelect(param)함수 시작");
@@ -709,16 +709,24 @@ public class EaApprovalController {
 		
 		List<EaGianVO> list = eaApprovalService.giDetailSelect(param);
 		
+		EmCommonVO ecvo = new EmCommonVO();
+		String i_no = (String)req.getSession().getAttribute("i_no");
+		
+		ecvo.setI_no(i_no);
+		
+		ecvo = commonInfoService.miniInfo(ecvo);
+			
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("toList", list);
 		mav.addObject("eList", eList);
 		mav.addObject("hList", hList);
+		mav.addObject("ecvo",ecvo);	
 		mav.setViewName(CONTEXT_PATH + "/gianToDetail");
 		return mav;
 	}
 	
 	//결재의견 팝업
-	@RequestMapping("/goCommentPop")
+	@RequestMapping("/comment")
 	public ModelAndView goCommentPop(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(CONTEXT_PATH + "/commentPop");
@@ -727,7 +735,7 @@ public class EaApprovalController {
 	
 	//결재
 	@ResponseBody
-	@RequestMapping(value="/approval", produces="application/text; charset=utf-8")
+	@RequestMapping(value="/approval", method=RequestMethod.POST,produces="application/text; charset=utf-8")
 	public String approval(@ModelAttribute EaApprovalVO param
 						   ,HttpServletRequest req){
 		logger.info("컨트롤러 approval(param)함수 시작");
@@ -750,11 +758,12 @@ public class EaApprovalController {
 		ecvo.setI_no(ea_aprno);
 		List<EmCommonVO> signL = eaApprovalService.signSelect(ecvo);
 		String mySign="";
-		for(int i=0;i<signL.size();i++){
-			EmCommonVO ec = signL.get(i);
-			mySign = ec.getEm_sign();
+		if(signL !=null&&signL.size()>0){
+			for(int i=0;i<signL.size();i++){
+				EmCommonVO ec = signL.get(i);
+				mySign = ec.getEm_sign();
+			}
 		}
-		
 		String state = param.getEa_stateno();
 		logger.info("결재상태코드 : " + state); 
 		
@@ -799,11 +808,11 @@ public class EaApprovalController {
 			
 			//결재상태에 따라 서명, 다음결재자 setting
 			if(state.equals("72")){ 
-				logger.info("72 여기?");
+				logger.info("72 ");
 				param.setEa_sign1(mySign);
 			}
 			if(state.equals("73")){
-				logger.info("73 여기?");
+				logger.info("73 ");
 				//sign1 히스토리에서 조회해와서 셋 
 				param.setEa_sign1(sign1);
 				param.setEa_sign2(mySign);
@@ -814,7 +823,7 @@ public class EaApprovalController {
 				param.setEa_sign2(mySign);
 			}
 			if(state.equals("76")){
-				logger.info("76 여기?");
+				logger.info("76 ");
 				//sign1,2
 				param.setEa_sign1(sign1);
 				param.setEa_sign2(sign2);
@@ -867,7 +876,7 @@ public class EaApprovalController {
 	}
 	
 	//기안서 상세보기
-	@RequestMapping("/giDetailSelect")
+	@RequestMapping(value = "/gian", method=RequestMethod.GET )
 	public ModelAndView detailSelect(@ModelAttribute EaDocumentVO param
 				 				     ,HttpServletRequest req){
 		//히스토리 의견 조회
@@ -891,7 +900,7 @@ public class EaApprovalController {
 		mav.addObject("list", list);
 		mav.addObject("eList", eList);
 		mav.addObject("hList", hList);
-		mav.setViewName(CONTEXT_PATH + "/gianDetail");
+		mav.setViewName(CONTEXT_PATH + "/gian");
 		return mav;
 	}
 	
