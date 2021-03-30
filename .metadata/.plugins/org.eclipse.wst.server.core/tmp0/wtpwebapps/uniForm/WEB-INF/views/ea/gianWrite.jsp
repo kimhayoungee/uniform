@@ -187,7 +187,7 @@
 						if(b){
 							var data = new FormData();
 							data.append("file", $("#file").prop("files")[0]);
-							alert("파일ㅇ");
+							//alert("파일ㅇ");
 							$.ajax({
 								
 								enctype : "multipart/form-data",
@@ -202,10 +202,10 @@
 									//var file = data.file.text();
 									
 										
-									alert("ajax 파일확인 : " + data);
+									//alert("ajax 파일확인 : " + data);
 									$('input[name=gi_attach]').attr('value', data);
 								
-									alert("gi_attach 밸류! " + $("#gi_attach").val());
+									//alert("gi_attach 밸류! " + $("#gi_attach").val());
 									
 								},
 								error : function(e){
@@ -219,7 +219,7 @@
 						//기안서 insert ajax
 						var fm = $("#eaGianForm").serialize();
 						$.ajax({
-							url : "/ea/gianFormInsert.uni",
+							url : "/ea/gian.uni",
 							data : fm,
 							type : "post",
 							success : function(data){
@@ -249,7 +249,7 @@
 					
 					window.open("", "pop", "width=" +popWidth+ ",height=" +popHeight+ ",left=" +popX+ ",top=" +popY);
 	         
-	            	$("#eaGianForm").attr("action", "/ea/goLinePop.uni");
+	            	$("#eaGianForm").attr("action", "/ea/line.uni");
 	            	$("#eaGianForm").attr("target", "pop");
 	            	$("#eaGianForm").submit();
 				});
@@ -266,7 +266,7 @@
 			
 			//메인보내기
 			function goEaMain(){
-				location.href = "/ea/goEaMain.uni";
+				location.href = "/ea/main.uni";
 			}
 			
 			//결재선가져오는 부모창 함수
@@ -424,14 +424,14 @@
 			<div class="box_lnb">
 				<div class="wrap1200 box_logo">
 					<h2 style="font-size:4.5em;"> 
-						<a href="#"><img src="/common/img/uniform2.JPG" width="180" height="53"></a>
+						<a href="#"><img src="/cssExample/img/uniform_logo1.jpg" width="180" height="53"></a>
 					</h2>
 				</div>
 				<nav>
 					<ul>
 						<li style="background-image: none;"><a href="#" id="navFirst">학교정보</a>
 						</li>
-						<li><a href="/ea/goEaMain.uni">전자결재</a>
+						<li><a href="/ea/main.uni">전자결재</a>
 						</li>
 						<li><a href="/main/pmGoPlanMain.uni">일정관리</a>
 						</li>
@@ -527,11 +527,11 @@
 					<li><a>휴가계 작성</a></li>
 				</ul>
 			</li>
-			<li><a href="/ea/goMenuTo.uni">결재할 문서</a></li> 
-			<li><a href="/ea/goMenuIng.uni">결재중 문서</a></li>
-			<li><a href="/ea/goMenuEd.uni">결재한 문서</a></li>
-			<li><a href="/ea/goMenuFin.uni">완료함</a></li>
-			<li><a href="/ea/goMenuRe.uni">반려함</a></li>
+			<li><a href="/ea/willbox.uni">결재할 문서</a></li> 
+			<li><a href="/ea/ingbox.uni">결재중 문서</a></li>
+			<li><a href="/ea/didbox.uni">결재한 문서</a></li>
+			<li><a href="/ea/finbox.uni">완료함</a></li>
+			<li><a href="/ea/returnbox.uni">반려함</a></li>
 			<li><a href="#">양식 다운로드</a></li>
 		</ul>
 	</nav>

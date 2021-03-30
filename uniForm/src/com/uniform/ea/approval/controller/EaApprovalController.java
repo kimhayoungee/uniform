@@ -109,7 +109,7 @@ public class EaApprovalController {
 	//menu 결재할 문서 이동
 	@RequestMapping(value="/willbox", method=RequestMethod.GET)
 	public ModelAndView goWillBox(@ModelAttribute PageVO param,HttpServletRequest req){
-		logger.info("컨트롤러 goMenuTo()함수 시작");
+		logger.info("컨트롤러 goWillBox()함수 시작");
 		
 		String i_no = (String)req.getSession().getAttribute("i_no");
 		
@@ -166,15 +166,15 @@ public class EaApprovalController {
 			mav.addObject("writer", param.getDo_writer());
 		}
 		mav.addObject("toList", toList);
-		mav.setViewName(CONTEXT_PATH + "/willbox");
+		mav.setViewName(CONTEXT_PATH + "/willBox");
 		return mav;
 	}	
 	
 	//menu 반려함 이동
-	@RequestMapping("/goMenuRe")
-	public ModelAndView goMenuRe(@ModelAttribute PageVO param
-								 ,HttpServletRequest req){
-		logger.info("컨트롤러 goMenuRe()함수 시작");
+	@RequestMapping(value="/returnbox", method=RequestMethod.GET)
+	public ModelAndView goReturnBox(@ModelAttribute PageVO param
+								   ,HttpServletRequest req){
+		logger.info("컨트롤러 goReturnBox()함수 시작");
 		
 		String i_no = (String)req.getSession().getAttribute("i_no");
 
@@ -219,15 +219,15 @@ public class EaApprovalController {
 			mav.addObject("date2", param.getDate2());
 		}		
 		mav.addObject("reList", reList);
-		mav.setViewName(CONTEXT_PATH + "/menuRe");
+		mav.setViewName(CONTEXT_PATH + "/returnBox");
 		return mav;
 	}	
 	
 	//menu 결재중 문서 이동
-	@RequestMapping("/goMenuIng")
-	public ModelAndView goMenuIng(@ModelAttribute PageVO param
+	@RequestMapping(value = "/ingbox", method=RequestMethod.GET)
+	public ModelAndView goIngBox(@ModelAttribute PageVO param
 								  ,HttpServletRequest req){
-		logger.info("컨트롤러 goMenuIng()함수 시작");
+		logger.info("컨트롤러 goIngBox()함수 시작");
 
 		String i_no = (String)req.getSession().getAttribute("i_no");
 		
@@ -280,15 +280,15 @@ public class EaApprovalController {
 			mav.addObject("date2", param.getDate2());
 		}
 		mav.addObject("inglist", inglist);
-		mav.setViewName(CONTEXT_PATH + "/menuIng");
+		mav.setViewName(CONTEXT_PATH + "/ingBox");
 		return mav;
 	}	
 	
 	//menu 완료함 이동
-	@RequestMapping("/goMenuFin")
-	public ModelAndView goMenuFin(@ModelAttribute PageVO param
+	@RequestMapping(value = "/finbox", method=RequestMethod.GET)
+	public ModelAndView goFinBox(@ModelAttribute PageVO param
 								  ,HttpServletRequest req){
-		logger.info("컨트롤러 goMenuFin()함수 시작");
+		logger.info("컨트롤러 goFinBox()함수 시작");
 		
 		String i_no = (String)req.getSession().getAttribute("i_no");
 
@@ -334,15 +334,15 @@ public class EaApprovalController {
 			mav.addObject("date2", param.getDate2());
 		}		
 		mav.addObject("finList", finList);
-		mav.setViewName(CONTEXT_PATH + "/menuFin");
+		mav.setViewName(CONTEXT_PATH + "/finBox");
 		return mav;
 	}
 	
 	//menu 결재한 문서 
-	@RequestMapping("/goMenuEd")
-	public ModelAndView goMenuEd(@ModelAttribute PageVO param
+	@RequestMapping(value = "/didbox", method=RequestMethod.GET)
+	public ModelAndView goDidBox(@ModelAttribute PageVO param
 								 ,HttpServletRequest req){
-		logger.info("컨트롤러 goMenuEd()함수 시작");
+		logger.info("컨트롤러 goDidBox()함수 시작");
 		System.out.println("두라잇 " + param.getDo_writer());
 		String i_no = (String)req.getSession().getAttribute("i_no");
 		
@@ -400,12 +400,12 @@ public class EaApprovalController {
 			mav.addObject("writer", param.getDo_writer());
 		}	
 		mav.addObject("edList", edList);
-		mav.setViewName(CONTEXT_PATH + "/menuEd");
+		mav.setViewName(CONTEXT_PATH + "/didBox");
 		return mav;
 	}	
 	
 	//전결 메인에서 기안서 팝업창으로 이동
-	@RequestMapping("/goGianPop")
+	@RequestMapping("/gian/pop")
 	public ModelAndView goGianPop(){
 		logger.info("컨트롤러 goGianPop()함수 시작");
 		ModelAndView mav = new ModelAndView();
@@ -414,7 +414,7 @@ public class EaApprovalController {
 	} //end of goGianPop()
 	
 	//기안 팝업창에서 기안서 작성창으로 이동 
-	@RequestMapping("/goGianWrite")
+	@RequestMapping("/gian/write")
 	public ModelAndView goGianWrite(@RequestParam("ea_linename") String ea_linename 
 								   ,HttpServletRequest req){
 		logger.info("컨트롤러 goGianWrite(ea_linename)함수 시작");
@@ -451,7 +451,7 @@ public class EaApprovalController {
 	} //end of goGianWrite(ea_linename)
 
 	//결재선 팝업
-	@RequestMapping("/goLinePop")
+	@RequestMapping("/line")
 	public ModelAndView goLinePop(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(CONTEXT_PATH + "/linePop");
@@ -460,7 +460,7 @@ public class EaApprovalController {
 	
 	//결재선 총장 처 조회
 	@ResponseBody
-	@RequestMapping("/deptSelect")
+	@RequestMapping("/line/dept")
 	public HashMap<String, List> deptSelect(){
 		logger.info("컨트롤러 deptSelect()함수 시작");
 		
@@ -482,7 +482,7 @@ public class EaApprovalController {
 	
 	//결재선 팀 조회
 	@ResponseBody
-	@RequestMapping("/teamSelect")
+	@RequestMapping("/line/team")
 	public HashMap<String, List> teamSelect(String dept){
 		logger.info("컨트롤러 teamSelect(dept)함수 시작");
 		logger.info("dept 확인 : " + dept);
@@ -509,7 +509,7 @@ public class EaApprovalController {
 	
 	//결재선 팀장 조회
 	@ResponseBody
-	@RequestMapping("/teamLeaderSelect")
+	@RequestMapping("/line/leader")
 	public List<CommonInfoVO> teamLeaderSelect(String team){
 		logger.info("컨트롤러 teamLeaderSelect(team)함수 시작");
 		logger.info("team 확인 : " + team);
@@ -557,7 +557,7 @@ public class EaApprovalController {
 	
 	//기안서 작성 
 	@ResponseBody
-	@RequestMapping(value="/gianFormInsert", produces="application/text; charset=utf-8")
+	@RequestMapping(value="/gian", method=RequestMethod.POST, produces="application/text; charset=utf-8")
 	public String gianFormInsert(@ModelAttribute EaGianVO param
 								 ,HttpServletRequest req){
 		logger.info("컨트롤러 gianFormInsert(param)");
@@ -673,7 +673,7 @@ public class EaApprovalController {
 	}
 	
 	//문서 삭제
-	@RequestMapping("/docDelete")
+	@RequestMapping("/delete")
 	public ModelAndView gianDelete(@ModelAttribute EaDocumentVO param
 								   ,HttpServletRequest req){
 		logger.info("컨트롤러 docDelete()함수 시작");

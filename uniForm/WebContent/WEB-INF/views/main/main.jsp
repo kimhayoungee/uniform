@@ -293,7 +293,8 @@
 	<div align="center">   
 		<table class="my_table" style="text-align:center;">
 			<tr align="center">
-				<td style="padding:0px;" rowspan="4" height="140" ><img width="105" height="140" src="/common/img/<%=em_img%>" align="left"></td>
+				<!-- src="/common/img/<em_img%>" -->
+				<td style="padding:0px;" rowspan="4" height="140" ><img width="105" height="140" src="/common/img/박지수.PNG" align="left"></td>
 				<td colspan="2" class="name" height="65"><%=i_nameKr %> <%=em_position %></td>
 			</tr>
 			<tr height="25" style="text-align:right;">

@@ -88,7 +88,7 @@
 					window.name = "main";
 					window.open("", "pop", "width=" +popWidth+ ",height=" +popHeight+ ",left=" +popX+ ",top=" +popY);
 					
-					$("#goWriteForm").attr("action", "/ea/goGianPop.uni");
+					$("#goWriteForm").attr("action", "/ea/gian/pop.uni");
 					$("#goWriteForm").attr("target", "pop");
 					$("#goWriteForm").submit();
 					//안되면 goWriteForm으로 수정
@@ -145,32 +145,32 @@
 				});
 				
 				//결재할문서 메뉴 이동
-				$(".willbox").click(function(){
+				$(".willBox").click(function(){
 					$("#goBox").attr("action", "/ea/willbox.uni");
-					$("#goMenu").submit();
+					$("#goBox").submit();
 				});
 				
 				//결재중문서 메뉴 이동
-				$(".menuIng").click(function(){
-					$("#goMenu").attr("action", "/ea/goMenuIng.uni");
-					$("#goMenu").submit();
+				$(".ingBox").click(function(){
+					$("#goBox").attr("action", "/ea/ingbox.uni");
+					$("#goBox").submit();
 				});
 				
 				//반려함 메뉴 이동
-				$(".menuRe").click(function(){
-					$("#goMenu").attr("action", "/ea/goMenuRe.uni");
-					$("#goMenu").submit();
+				$(".returnBox").click(function(){
+					$("#goBox").attr("action", "/ea/returnbox.uni");
+					$("#goBox").submit();
 				});
 				
 				//완료함 메뉴 이동
-				$(".menuFin").click(function(){
-					$("#goMenu").attr("action", "/ea/goMenuFin.uni");
-					$("#goMenu").submit();
+				$(".finBox").click(function(){
+					$("#goBox").attr("action", "/ea/finbox.uni");
+					$("#goBox").submit();
 				});
 
 				$("#ed_btn").click(function(){
-					$("#goMenu").attr("action", "/ea/goMenuEd.uni");
-					$("#goMenu").submit();
+					$("#goBox").attr("action", "/ea/didbox.uni");
+					$("#goBox").submit();
 				});
 				
 				//메뉴
@@ -187,7 +187,7 @@
 			function linename(ea_linename){
 				//alert("확인 > " + ea_linename);
 				$("#ea_linename").val(ea_linename);
-				$("#linenameForm").attr("action", "/ea/goGianWrite.uni");
+				$("#linenameForm").attr("action", "/ea/gian/write.uni");
 				$("#linenameForm").submit();	
 			}
 			
@@ -370,7 +370,7 @@
 					<ul>
 						<li style="background-image: none;"><a href="#" id="navFirst">학교정보</a>
 						</li>
-						<li><a href="/ea/goEaMain.uni">전자결재</a>
+						<li><a href="/ea/main.uni">전자결재</a>
 						</li>
 						<li><a href="/main/pmGoPlanMain.uni">일정관리</a>
 						</li>
@@ -467,10 +467,10 @@
 				</ul>
 			</li>
 			<li><a href="/ea/willbox.uni">결재할 문서</a></li> 
-			<li><a href="/ea/goMenuIng.uni">결재중 문서</a></li>
-			<li><a href="/ea/goMenuEd.uni">결재한 문서</a></li>
-			<li><a href="/ea/goMenuFin.uni">완료함</a></li>
-			<li><a href="/ea/goMenuRe.uni">반려함</a></li>
+			<li><a href="/ea/ingbox.uni">결재중 문서</a></li>
+			<li><a href="/ea/didbox.uni">결재한 문서</a></li>
+			<li><a href="/ea/finbox.uni">완료함</a></li>
+			<li><a href="/ea/returnbox.uni">반려함</a></li>
 			<li><a href="/ea/goUploadList.uni">양식 다운로드</a></li>
 		</ul>
 	</nav>
@@ -502,7 +502,7 @@
 				<td>
 					<table class="t1">
 						<tr class="menu_title">
-							<td colspan="4" align="left"><span class="willbox">결재할 문서</span></td>
+							<td colspan="4" align="left"><span class="willBox">결재할 문서</span></td>
 						</tr>
 						<tr class="contents" height=25>
 							<td class="con_type">분류</td>
@@ -565,7 +565,7 @@
 				<td>
 					<table class="t2">
 						<tr class="menu_title">
-							<td colspan="4" align="left"><span class="menuRe">반려함</span></td>
+							<td colspan="4" align="left"><span class="returnBox">반려함</span></td>
 						</tr>					
 						<tr class="contents">
 							<td class="con_type">분류</td>
@@ -628,7 +628,7 @@
 				
 					<table class="t3">
 						<tr class="menu_title">
-							<td colspan="4" align="left"><span class="menuIng">결재중 문서</span></td>
+							<td colspan="4" align="left"><span class="ingBox">결재중 문서</span></td>
 						</tr>					
 						<tr class="contents">
 							<td class="con_type">분류</td>
@@ -693,7 +693,7 @@
 				<td>
 					<table class="t4">
 						<tr class="menu_title">
-							<td colspan="4" align="left"><span class="menuFin">완료함</span></td>
+							<td colspan="4" align="left"><span class="finBox">완료함</span></td>
 						</tr>						
 						<tr height="25" class="contents">
 							<td class="con_type">분류</td>

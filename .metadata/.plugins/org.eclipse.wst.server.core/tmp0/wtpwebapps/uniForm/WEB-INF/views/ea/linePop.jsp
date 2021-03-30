@@ -66,7 +66,7 @@
 					var ino = "";
 					
 					$.ajax({
-						url : "/ea/deptSelect.uni",
+						url : "/ea/line/dept.uni",
 						data : {},
 						type : "post",
 						success : function(data){	
@@ -110,7 +110,7 @@
 							}
 							
 							$.ajax({
-								url : "/ea/teamSelect.uni",
+								url : "/ea/line/team.uni",
 								data : {dept : $("#deptSelect1").val()},
 								type : "post",
 								success : function(data){
@@ -152,7 +152,7 @@
 							}
 							
 							$.ajax({
-								url : "/ea/teamLeaderSelect.uni",
+								url : "/ea/line/leader.uni",
 								data : {team : $("#teamSelect1").val()},
 								type : "post",
 								success : function(data){
@@ -200,7 +200,7 @@
 					var ino = "";
 					
 					$.ajax({
-						url : "/ea/deptSelect.uni",
+						url : "/ea/line/dept.uni",
 						data : {},
 						type : "post",
 						success : function(data){	
@@ -246,7 +246,7 @@
 						}
 						
 						$.ajax({
-							url : "/ea/teamSelect.uni",
+							url : "/ea/line/team.uni",
 							data : {dept : $("#deptSelect2").val()},
 							type : "post",
 							success : function(data){
@@ -292,7 +292,7 @@
 						}
 						
 						$.ajax({
-							url : "/ea/teamLeaderSelect.uni",
+							url : "/ea/line/leader.uni",
 							data : {team : $("#teamSelect2").val()},
 							type : "post",
 							success : function(data){
@@ -337,7 +337,7 @@
 					var ino = "";
 					
 					$.ajax({
-						url : "/ea/deptSelect.uni",
+						url : "/ea/line/dept.uni",
 						data : {},
 						type : "post",
 						success : function(data){	
@@ -380,7 +380,7 @@
 						}
 						
 						$.ajax({
-							url : "/ea/teamSelect.uni",
+							url : "/ea/line/team.uni",
 							data : {dept : $("#deptSelect3").val()},
 							type : "post",
 							success : function(data){
@@ -427,7 +427,7 @@
 						}
 						
 						$.ajax({
-							url : "/ea/teamLeaderSelect.uni",
+							url : "/ea/line/leader.uni",
 							data : {team : $("#teamSelect3").val()},
 							type : "post",
 							success : function(data){
