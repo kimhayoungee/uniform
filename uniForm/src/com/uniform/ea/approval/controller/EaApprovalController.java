@@ -68,7 +68,7 @@ public class EaApprovalController {
 	final static String DOWNLOADPATH = "files/";
 	
 	//전자결재메인으로 이동
-	@RequestMapping("/goEaMain")
+	@RequestMapping("/main")
 	public ModelAndView goEaMain(HttpServletRequest req){
 		logger.info("컨트롤러 goEaMain()함수 시작");
 		//b가 있으면 reload()하기 위해 받아옴
@@ -102,13 +102,13 @@ public class EaApprovalController {
 		mav.addObject("finList", finList);
 		mav.addObject("ecvo",ecvo);
 		//리다이렉트용
-		mav.setViewName(CONTEXT_PATH + "/eaMain");
+		mav.setViewName(CONTEXT_PATH + "/main");
 		return mav;
 	}
 	
 	//menu 결재할 문서 이동
-	@RequestMapping("/goMenuTo")
-	public ModelAndView goMenuTo(@ModelAttribute PageVO param,HttpServletRequest req){
+	@RequestMapping(value="/willbox", method=RequestMethod.GET)
+	public ModelAndView goWillBox(@ModelAttribute PageVO param,HttpServletRequest req){
 		logger.info("컨트롤러 goMenuTo()함수 시작");
 		
 		String i_no = (String)req.getSession().getAttribute("i_no");
@@ -166,7 +166,7 @@ public class EaApprovalController {
 			mav.addObject("writer", param.getDo_writer());
 		}
 		mav.addObject("toList", toList);
-		mav.setViewName(CONTEXT_PATH + "/menuTo");
+		mav.setViewName(CONTEXT_PATH + "/willbox");
 		return mav;
 	}	
 	

@@ -145,8 +145,8 @@
 				});
 				
 				//결재할문서 메뉴 이동
-				$(".menuTo").click(function(){
-					$("#goMenu").attr("action", "/ea/goMenuTo.uni");
+				$(".willbox").click(function(){
+					$("#goBox").attr("action", "/ea/willbox.uni");
 					$("#goMenu").submit();
 				});
 				
@@ -466,7 +466,7 @@
 					<li><a>휴가계 작성</a></li>
 				</ul>
 			</li>
-			<li><a href="/ea/goMenuTo.uni">결재할 문서</a></li> 
+			<li><a href="/ea/willbox.uni">결재할 문서</a></li> 
 			<li><a href="/ea/goMenuIng.uni">결재중 문서</a></li>
 			<li><a href="/ea/goMenuEd.uni">결재한 문서</a></li>
 			<li><a href="/ea/goMenuFin.uni">완료함</a></li>
@@ -502,7 +502,7 @@
 				<td>
 					<table class="t1">
 						<tr class="menu_title">
-							<td colspan="4" align="left"><span class="menuTo">결재할 문서</span></td>
+							<td colspan="4" align="left"><span class="willbox">결재할 문서</span></td>
 						</tr>
 						<tr class="contents" height=25>
 							<td class="con_type">분류</td>
@@ -796,7 +796,7 @@
 		</form>
 		
 		<!-- 메뉴 이동 -->
-		<form name="goMenu" id="goMenu">
+		<form name="goMenu" id="goMenu" method="GET">
 			<input type="hidden" name="finList" id="finList" value="<%=finList%>">
 
 		</form>

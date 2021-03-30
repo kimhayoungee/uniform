@@ -250,7 +250,7 @@
 					<ul>
 						<li style="background-image: none;"><a href="#" id="navFirst">학교정보</a>
 						</li>
-						<li><a href="/ea/goEaMain.uni">전자결재</a>
+						<li><a href="/ea/main.uni">전자결재</a>
 						</li>
 						<li><a href="/main/pmGoPlanMain.uni">일정관리</a>
 						</li>
