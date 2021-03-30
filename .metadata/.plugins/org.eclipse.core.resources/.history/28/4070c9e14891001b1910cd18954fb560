@@ -1052,7 +1052,7 @@ public class EaApprovalController {
 		return mav;
 	}
 	
-	//휴가계 결재할 문서 상세
+	//기안서 결재할 문서 상세
 	@RequestMapping("/vaToSelect")
 	public ModelAndView vaToSelect(@ModelAttribute EaDocumentVO param
 			  					  ,HttpServletRequest req){
