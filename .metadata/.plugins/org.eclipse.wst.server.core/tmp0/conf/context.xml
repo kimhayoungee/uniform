@@ -31,7 +31,12 @@
     <!--
     <Valve className="org.apache.catalina.valves.CometConnectionManagerValve" />
     -->
-    <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver"
+    
+<!--     <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver"
     		  name="jdbc/Oracle11G" password="user1234" type="javax.sql.DataSource"
-   			  url="jdbc:oracle:thin:@orclu.cbnm6316ham5.us-east-2.rds.amazonaws.com:1521:orclu" username="admin"/>   
+   			  url="jdbc:oracle:thin:@orclu.cbnm6316ham5.us-east-2.rds.amazonaws.com:1521:orclu" username="admin"/>    -->
+   	<Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver"
+   	 name="jdbc/Oracle11G" type="javax.sql.DataSource"
+   	 url="jdbc:oracle:thin:@localhost:1521:XE" user="UNIFORM" password="user00"/>	  
+   			  
 </Context>
